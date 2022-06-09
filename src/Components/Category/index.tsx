@@ -1,9 +1,11 @@
+import { CircularProgress } from "@mui/material";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
+import { CategoryCards } from "./CategoryCards";
 
 const Category = () => {
-    const [category, setCat] = useState<string[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
+    const [category, setCat] = useState<string[]>([])
+    const [isLoading, setIsLoading] = useState(true)
     const [isError, setIsError] = useState(false)
 
     useEffect( () => {
@@ -14,17 +16,21 @@ const Category = () => {
           .finally(() => setIsLoading(false)) 
       }, [])
 
-    if (isError) return (<h2>Произошла ошибка</h2>);
+    if (isError) return (<h2>Произошла ошибка</h2>)
 
     return (
         <section>
-            { category.map( (item, index) => {
-                return <li>
-                <Link to="category" key={index}>{item}</Link>
-                </li>
+            { isLoading ? <CircularProgress /> : 
+             category.map( (item, index) => {
+                return (
+                <div>
+                    <Link to={item} key={index}>{item}</Link>
+                </div>)
+                
             })
             }
         </section>
-    );
-};
+    )
+}
 export {Category};
+// Добавить категории как карточки именно здесь, используя item 

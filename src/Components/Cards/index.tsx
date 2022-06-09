@@ -3,6 +3,7 @@ import { MobileStepper } from "@mui/material";
 import Button from '@mui/material/Button';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
+import { Link } from "react-router-dom";
 
 type TCard = {
   title: string,
@@ -46,7 +47,7 @@ const Card:FC<TCard> = ({title, img, discr, id}) =>  {
               />
           </div>
           <span>
-            <h3>{title}</h3>
+            <h3><Link to={`/products/${id}`}> {title} </Link></h3>
             <p >
           {discr}</p>
           </span>
