@@ -1,6 +1,6 @@
 import { CircularProgress } from "@mui/material";
 import { useState, useEffect } from "react";
-import { Link, Route, Routes } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { CategoryCards } from "./CategoryCards";
 
 const Category = () => {
@@ -23,8 +23,8 @@ const Category = () => {
             { isLoading ? <CircularProgress /> : 
              category.map( (item, index) => {
                 return (
-                <div>
-                    <Link to={item} key={index}>{item}</Link>
+                <div key={index}>
+                    <Link to={`/category/${item}`} key={item}>{item}</Link>
                 </div>)
                 
             })

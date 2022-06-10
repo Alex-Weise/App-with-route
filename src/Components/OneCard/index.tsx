@@ -19,29 +19,30 @@ const StyledRating = styled(Rating)({
 
 const OneCard:FC = () => {
   const {id} = useParams()
-  const [product, setProduct] = useState<TContent>(Object)
+  const [product, setProduct] = useState<TContent | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [isError, setIsError] = useState(false)
-
+  const [imageURL, setImageURL] = useState<string>('')
   useEffect( () => {
-    fetch(`'https://dummyjson.com/products/${id}'`)
+    fetch(`https://dummyjson.com/products/${id}`)
     .then(response => response.json())
-    .then(data => setProduct(data))
+    .then(data => {
+        setImageURL(data.thumbnail);
+        setProduct(data)})
     .catch(() => setIsError(true))
-    .finally(() => setIsLoading(false)) 
+    .finally(() => setIsLoading(false));
   }, [id])
-  const [imageURL, setImageURL] = useState<string>(product.thumbnail)
-
+console.log(product);
     return (
         <section>
-            <div>
+          {product && <><div>
                 <h2>{product.title}</h2>
                 <h3>Price {product.price}$</h3>
             </div>
             <div>
               <div>
                   { product.images.map( (item, index) => {
-                     return (<button type="button" key={index + 1}
+                     return (<button type="button" key={item}
                       onClick={ () => setImageURL(item) }>{index + 1}</button>)})
                   }
               </div>
@@ -62,7 +63,7 @@ const OneCard:FC = () => {
             </div>
             <div>
                 <p>{product.description}</p>
-            </div>
+            </div> </>}
         </section>
     );
 }

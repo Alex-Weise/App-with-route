@@ -1,10 +1,11 @@
 import { useLocation, Navigate } from "react-router-dom";
+import { useAuth } from "../hook/useAuth";
 
-const Autorise = ({children}) => {
+const Autorise = ({children}: any) => {
     const location = useLocation();
-    const auth = false;
+    const { user } = useAuth();
 
-    if (!auth) {
+    if (!user) {
         return <Navigate to="/login" state={{form: location}} />
     }
 
