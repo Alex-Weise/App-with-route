@@ -1,6 +1,11 @@
 import { createContext, useState } from "react";
+type TCont = {
+    user?: string,
+    signin?: Function,
+    signout?: Function,
+}
 
-export const AuthContext = createContext({});
+export const AuthContext = createContext<TCont>({});
 
 export const Provider = ({children}:any) => {
     const [user, setUser] = useState<string>('');
