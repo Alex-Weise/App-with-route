@@ -2,6 +2,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { useEffect, useState } from "react";
 import { TContent } from "../../type/type";
 import { Card } from "../Cards";
+import style from "./styles.module.scss"
 
 export const DEFAULT_REQUEST_LIMIT = 12;
 export const DEFAULT_URL = `https://dummyjson.com/products?limit=${DEFAULT_REQUEST_LIMIT}`;
@@ -22,7 +23,7 @@ const Home = () => {
     if (isError) return (<h2>Произошла ошибка</h2>)
 
     return (
-        <section>
+        <section className={style.cards}>
             { isLoading ? <CircularProgress /> : 
             products.map( (item) => {
                 return (<Card title={item.brand} img={item.images} id={item.id}

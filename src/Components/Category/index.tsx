@@ -2,6 +2,7 @@ import { CircularProgress } from "@mui/material";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { CategoryCards } from "./CategoryCards";
+import style from "./styles.module.scss";
 
 const Category = () => {
     const [category, setCat] = useState<string[]>([])
@@ -19,7 +20,7 @@ const Category = () => {
     if (isError) return (<h2>Произошла ошибка</h2>)
 
     return (
-        <section>
+        <section className={style.category}>
             { isLoading ? <CircularProgress /> : 
              category.map( (item, index) => {
                 return (

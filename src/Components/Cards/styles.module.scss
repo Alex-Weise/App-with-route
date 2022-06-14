@@ -1,5 +1,6 @@
 .card {
-    width: 49%;
+    margin: 5px;
+    width: 48%;
     border-radius: 5px;
     box-shadow: 2px 2px 5px 2px rgba(0,0,0,.35);
     background-color: transparent;
@@ -25,14 +26,25 @@
   }
   
   .img {
+    margin: 3px;
     display: block;
     width: 100%;
     object-fit: fill;
+    max-width: 200px;
+    max-height: 170px;
     overflow: hidden;
+    border-radius: 5px;
   }
   
   .title {
     text-align: center;
     font-size: 18px;
     color: #F90B6D;
+    text-decoration: none
   };
+
+  .stepper {
+    background-color: transparent;
+    text-align: start;
+    max-width: 200px;
+  }

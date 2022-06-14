@@ -1,6 +1,8 @@
 import { SyntheticEvent } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hook/useAuth";
+import style from "./styles.module.scss"
+import CheckIcon from '@mui/icons-material/Check';
 
 
 const Login = () => {
@@ -20,10 +22,10 @@ const Login = () => {
     return (
         <section>
             <form onSubmit={handleSubmit}>
-                <label>
-                    Name: <input name="username"></input>
+                <label className={style.login}>
+                    Введите Имя: <input name="username" className={style.input}></input>
                 </label>
-                <button type="submit">Login</button>
+                <button type="submit" className={style.button}>Запомнить <CheckIcon sx={{color: "black", fontSize: 18}}/></button>
             </form>
         </section>
     )

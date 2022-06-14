@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import { Link } from "react-router-dom";
+import style from "./styles.module.scss"
 
 type TCard = {
   title: string,
@@ -29,10 +30,11 @@ const Card:FC<TCard> = ({title, img, discr, id}) =>  {
   };
 
     return (
-        <div>
-          <div>
-            <img src={img[activeStep]} alt={title}/>
+        <div className={style.card}>
+          <div className={style.image}>
+            <img src={img[activeStep]} alt={title} className={style.img}/>
             <MobileStepper
+              className={style.stepper}
               steps={maxSteps}
               position="static"
               activeStep={activeStep}
@@ -47,9 +49,8 @@ const Card:FC<TCard> = ({title, img, discr, id}) =>  {
               />
           </div>
           <span>
-            <h3><Link to={`/products/${id}`}> {title} </Link></h3>
-            <p >
-          {discr}</p>
+            <h3><Link to={`/products/${id}`} className={style.title}> {title} </Link></h3>
+            <p className={style.text}>{discr}</p>
           </span>
         </div>
     );
