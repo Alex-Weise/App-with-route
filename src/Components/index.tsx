@@ -45,7 +45,9 @@ const GlobalPage = () => {
           <main className={style.main}>
               <Outlet />
           </main>
-          <footer className={style.footer}> С заботой о природе. 2022</footer>
+          <footer className={style.footer}> 
+             <div className={style.foottext}>С заботой о природе. 2022</div>
+          </footer>
         </>
     );
 };

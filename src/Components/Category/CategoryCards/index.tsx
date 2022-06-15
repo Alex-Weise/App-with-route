@@ -3,6 +3,7 @@ import { useState, useEffect, FC } from "react";
 import { TContent } from "../../../type/type";
 import { Card } from "../../Cards";
 import { useParams } from "react-router-dom";
+import style from "./styles.module.scss"
 
 
 const CategoryCards:FC = () => {
@@ -22,7 +23,7 @@ const CategoryCards:FC = () => {
     if (isError) return (<h2>Произошла ошибка</h2>)
 
     return (
-        <section>
+        <section className={style.cards}>
             {isLoading ? <CircularProgress /> : 
             categories.map( (item) => {
                 return (<Card title={item.brand} img={item.images} id={item.id}
