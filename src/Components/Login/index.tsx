@@ -1,22 +1,27 @@
-import { SyntheticEvent } from "react";
+import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hook/useAuth";
 import style from "./styles.module.scss"
 import CheckIcon from '@mui/icons-material/Check';
 
+type LocationProps = {
+    state: {
+      from: Location;
+    };
+  };
 
 const Login = () => {
     const navigate = useNavigate();
-    const location = useLocation();
+    const location = useLocation() as LocationProps;
     const { signin } = useAuth();
 
     const fromPage = location.state?.from?.pathname || '/';
 
-    const handleSubmit = (event: SyntheticEvent) => {
+    const handleSubmit = (event:any) => {
         event.preventDefault();
         const form = event.target;
         const user = form.username.value;
-        signin(user, () => { navigate(fromPage, {replace: true})});
+        if ( signin !== undefined) signin(user, () => { navigate(fromPage, {replace: true})});
     }
 
     return (

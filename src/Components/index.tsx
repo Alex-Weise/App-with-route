@@ -9,15 +9,19 @@ const GlobalPage = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const [value, setValue] = useState("products");
-    const { user, signout, signin } = useAuth();
+    const { user, signout } = useAuth();
 
     useEffect ( () => {
         setValue(location.pathname.slice(1));
         return () => setValue("products");
-    }, [user])
+    }, [user, location])
 
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
       setValue(newValue);
+    };
+
+    const handleClick = () => {
+      if (signout !== undefined) signout( () => navigate("/", {replace: true}))
     };
 
     return (
@@ -37,7 +41,7 @@ const GlobalPage = () => {
               { user ? <Box sx={{ typography: 'subtitle1', mx: 4, p: 0}}
                         >
                      <h3>Привет! Вы вошли как <p className={style.user}>{user}</p></h3>
-                    <button type="button" onClick={() => signout( () => navigate("/", {replace: true}))}>Выйти</button>
+                    <button type="button" onClick={handleClick}>Выйти</button>
                </Box> :
                <Tab value="login" component={Link} to="login" label="Авторизация" sx={{ fontSize: 20, textTransform: 'none', mx: 4, p: 0 }} />}
             </Tabs>

@@ -1,9 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
-import Rating from '@mui/material/Rating';
+import { CircularProgress, Rating, Typography, styled } from "@mui/material";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import Typography from '@mui/material/Typography';
-import { styled } from '@mui/material/styles';
 import { TContent } from "../../type/type";
 import { useParams } from "react-router-dom";
 
@@ -32,10 +30,13 @@ const OneCard:FC = () => {
     .catch(() => setIsError(true))
     .finally(() => setIsLoading(false));
   }, [id])
-console.log(product);
+
+  if (isError) return (<h2>Произошла ошибка</h2>)
+
     return (
         <section>
-          {product && <><div>
+          {isLoading ? <CircularProgress /> : 
+            product && <><div>
                 <h2>{product.title}</h2>
                 <h3>Price {product.price}$</h3>
             </div>
