@@ -1,4 +1,4 @@
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, Stack, Pagination } from "@mui/material";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import style from "./styles.module.scss";
@@ -30,17 +30,17 @@ const Category = () => {
        return () => setImgSRC([])
     }, [category])
 
-    // const getImage = async (name:string) => {
-    //   const response = await fetch(`https://dummyjson.com/products/category/${name}`);
-    //   const data = await response.json();
-    //   const imgSRC = await data.products[0].thumbnail;
-    //   console.log(imgSRC);
-    // //   return ( <img src={img} alt={name} className={style.img} />)
-    // };
+    const handlePageChange = (event:React.ChangeEvent<unknown>, page:number) => {
+        event.preventDefault();
+    }
 
     if (isError) return (<h2>Произошла ошибка</h2>)
 
     return (
+      <>
+        <Stack spacing={2}>
+            <Pagination count={4} color="secondary" className={style.section} onChange={handlePageChange} />
+        </Stack>
         <section className={style.category}>
             { isLoading ? <CircularProgress /> : 
              category.map( (item, index) => {
@@ -53,7 +53,7 @@ const Category = () => {
             })
             }
         </section>
+      </>
     )
 }
 export {Category};
-// Добавить категории как карточки именно здесь, используя item 

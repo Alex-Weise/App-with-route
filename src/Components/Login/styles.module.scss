@@ -1,5 +1,9 @@
+.form {
+    text-align: center;
+}
+
 .login {
-    font-size: 16px;
+    font-size: 18px;
 }
 .button {
     margin-left: 4px;
@@ -8,14 +12,14 @@
     cursor: pointer;
     font-size: 16px;
     &:hover {
-        background-color: #f2d9f6;
+        background-color: #a2d89375;
     }
 }
 
 .input {
+    background-color: transparent;
+    margin: 10px;
     border: none;
-    border-bottom: 2px solid #ce93d8;
-    &:hover {
-        background-color: #f2d9f6;
-    }
+    border-bottom: 2px solid #a2d893;
+    width: 30%;
 }

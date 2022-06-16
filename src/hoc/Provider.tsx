@@ -1,13 +1,18 @@
-import { createContext, useState } from "react";
+import { createContext, FC, ReactNode, useState } from "react";
+
 type TCont = {
-    user?: string,
-    signin?: Function,
-    signout?: Function,
-}
+    user: string,
+    signin: Function,
+    signout: Function,
+};
 
-export const AuthContext = createContext<TCont>({});
+type TProp = {
+    children: ReactNode,
+};
 
-export const Provider = ({children}:any) => {
+export const AuthContext = createContext<TCont>({} as TCont);
+
+export const Provider:FC<TProp> = ({children}) => {
     const [user, setUser] = useState<string>('');
 
     const signin = (newUser:string, callback:Function) => {

@@ -1,7 +1,11 @@
+import { FC, ReactNode } from "react";
 import { useLocation, Navigate } from "react-router-dom";
 import { useAuth } from "../hook/useAuth";
 
-const Autorise = ({children}: any) => {
+type TProp = {
+    children: ReactNode,
+}
+const Autorise:FC<TProp> = ({children}) => {
     const location = useLocation();
     const { user } = useAuth();
 
@@ -9,7 +13,7 @@ const Autorise = ({children}: any) => {
         return <Navigate to="/login" state={{form: location}} />
     }
 
-    return children
+    return <>{children}</>
 
 };
 
