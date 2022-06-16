@@ -1,6 +1,5 @@
 import React, { FC } from "react";
-import { MobileStepper } from "@mui/material";
-import Button from '@mui/material/Button';
+import { MobileStepper, Button } from "@mui/material";
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import { Link } from "react-router-dom";
@@ -39,11 +38,11 @@ const Card:FC<TCard> = ({title, img, discr, id}) =>  {
               position="static"
               activeStep={activeStep}
               nextButton={
-                <Button size="small" onClick={handleNext} disabled={activeStep === maxSteps - 1}>
+                <Button size="small" color="secondary" onClick={handleNext} disabled={activeStep === maxSteps - 1}>
                   <KeyboardArrowRight />
                 </Button>}
               backButton={
-                <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
+                <Button size="small" color="secondary" onClick={handleBack} disabled={activeStep === 0}>
                    <KeyboardArrowLeft />
                 </Button>} 
               />
