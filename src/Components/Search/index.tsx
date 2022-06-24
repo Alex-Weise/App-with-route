@@ -1,17 +1,19 @@
-import React, { useState, useEffect } from "react";
+import { FC } from "react";
 import SearchIcon from '@mui/icons-material/Search';
 import style from "./styles.module.scss";
+import { useNavigate } from "react-router-dom";
 
 
-const Search = () => {
-    const [value, setValue] = useState<string>('');
+const Search:FC = () => {
+  const navigate = useNavigate();
 
-    const handleSubmit = (event:any) => {
+  const handleSubmit = (event:any) => {
         event.preventDefault();
         const form = event.target;
         const search = form.search.value;
-        setValue(search);
-    }
+        navigate("/products/search", {state:search});
+  };
+
     return ( 
       <section className={style.search}>
         <form onSubmit={handleSubmit}>

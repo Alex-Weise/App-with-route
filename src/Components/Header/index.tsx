@@ -34,7 +34,7 @@ const Header = () => {
     const handleClose = () => setIsOpen(false);
 
     useEffect ( () => {
-        setTabValue(location.pathname.slice(1));
+        setTabValue(location.pathname.slice(1,9));
         return () => setTabValue("products");
     }, [user, location])
 

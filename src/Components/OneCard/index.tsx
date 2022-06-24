@@ -5,6 +5,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ReplyIcon from '@mui/icons-material/Reply';
 import { TContent } from "../../type/type";
 import { useParams, useNavigate } from "react-router-dom";
+import style from "../Home/styles.module.scss";
 
 const StyledRating = styled(Rating)({
     '& .MuiRating-iconFilled': {
@@ -36,7 +37,10 @@ const OneCard:FC = () => {
 
   const goBack = () => navigate(-1);
 
-  if (isError) return (<h2>Произошла ошибка</h2>)
+  if (isError) return (<h2 className={style.err}>
+    <Button onClick={goBack} color="secondary" startIcon={<ReplyIcon />}>Назад</Button>
+    Произошла ошибка
+    </h2>);
 
     return (
         <section>

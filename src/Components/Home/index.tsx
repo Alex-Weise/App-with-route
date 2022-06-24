@@ -3,6 +3,7 @@ import { TContent } from "../../type/type";
 import { Card } from "../Cards";
 import { CircularProgress } from "@mui/material";
 import style from "./styles.module.scss";
+import { Search } from "../Search";
 
 export const DEFAULT_REQUEST_LIMIT = 10;
 
@@ -18,19 +19,24 @@ const Home = () => {
          .then(response => response.json())
          .then(data => {setProducts(data.products)})
          .catch(err => setIsError(true))
-         .finally(() => setIsLoading(false)) 
+         .finally(() => setIsLoading(false));
+
+        return () => setProducts([]);
     }, [DEFAULT_URL, skip])
 
-    if (isError) return (<h2>Произошла ошибка</h2>)
+    if (isError) return (<h2 className={style.err}>Произошла ошибка</h2>);
 
     return (
         <section>
+            <section><Search /></section>
+            <section>
             <div className={style.cards}>
             { isLoading ? <CircularProgress /> : 
             products.map( (item) => {
                 return (<Card title={item.brand} img={item.images} id={item.id}
                   discr={item.description} key={item.id}/>)})}
             </div>
+            </section>
         </section>
     );
 };
