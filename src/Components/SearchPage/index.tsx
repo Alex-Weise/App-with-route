@@ -45,7 +45,7 @@ const SearchPage = () => {
 
     return (
         <section>
-             <Search /> 
+             <Search value={valueSearch}/> 
              <section>
              <Button onClick={goBack} color="secondary" startIcon={<ReplyIcon />}>Назад</Button>
             <div className={style.cards}>

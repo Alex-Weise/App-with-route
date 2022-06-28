@@ -20,13 +20,14 @@ const Category = () => {
     }, [])
 
     useEffect( () => {
-       category.map( (item, index) => {
-          fetch(`https://dummyjson.com/products/category/${item}`)
+       category.map( (item) => {
+          return fetch(`https://dummyjson.com/products/category/${item}`)
           .then(response => response.json())
           .then(data => setImgSRC( imgSRC => imgSRC.concat(data.products[0].images[1])))
           .catch(() => setIsError(true))
           .finally(() => setIsLoading(false)); 
-       })
+       });
+
        return () => setImgSRC([])
     }, [category])
 
