@@ -6,6 +6,7 @@ import { CircularProgress, Button } from "@mui/material";
 import ReplyIcon from '@mui/icons-material/Reply';
 import { Card } from "../Cards";
 import style from "../Home/styles.module.scss";
+import { DEFAULT_REQUEST_LIMIT } from "../Home";
 
 type TPropLoc = {
     state: string,
@@ -19,20 +20,49 @@ const SearchPage = () => {
     const [isSerchErr, setIsSearchErr] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const [isError, setIsError] = useState(false);
+    const [skip, setSkip] = useState(DEFAULT_REQUEST_LIMIT);
+    const [total, setTotal] = useState(0);
+    const DEFAULT_URL = `https://dummyjson.com/products/search?q=${valueSearch}&limit=${DEFAULT_REQUEST_LIMIT}`;
 
     useEffect ( () => {
         setValueSearch(location.state);
-        valueSearch && fetch(`https://dummyjson.com/products/search?q=${valueSearch}`)
+        valueSearch && fetch(DEFAULT_URL)
           .then(response => response.json())
           .then(data => {
             if(data.products.length === 0) setIsSearchErr(true);
+            setTotal(data.total);
             setProducts(data.products);
           })
           .catch(err => setIsError(true))
           .finally(() => setIsLoading(false));
 
         return () => setValueSearch('');
-    }, [valueSearch, location]);
+    }, [valueSearch, location, DEFAULT_URL]);
+
+    useEffect ( () => {
+        const concatURL = DEFAULT_URL + `&skip=${skip}`;
+        const upload = () => {
+            fetch(concatURL)
+             .then(response => response.json())
+             .then(data => setProducts(products.concat(data.products)))
+        };
+
+        const handlerscroll = () => {
+            const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+            const scrolled = Math.ceil(window.scrollY);
+             if (scrolled === scrollable) {
+                setSkip(skip + DEFAULT_REQUEST_LIMIT);
+                upload();
+            }
+        };
+        if (total > DEFAULT_REQUEST_LIMIT && !(skip >= total)) {
+            window.addEventListener('scroll', handlerscroll)
+        };
+
+        return () => {
+            window.removeEventListener('scroll', handlerscroll);
+        }
+    }, [total, products, DEFAULT_URL, skip])
 
     const goBack = () => navigate(-1);
 

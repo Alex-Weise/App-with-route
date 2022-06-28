@@ -3,27 +3,38 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import style from "./styles.module.scss";
 
+const DEFAULT_LIMIT_CAT = 4;
+
 const Category = () => {
     const [category, setCat] = useState<string[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isError, setIsError] = useState(false);
     const [imgSRC, setImgSRC] = useState<string[]>([]);
+    const [countPage, setCountPage] = useState(1);
+    const [maxPage, setMaxPage] = useState(1);
 
     useEffect( () => {
-        fetch('https://dummyjson.com/products/categories')
+        const load = async () => {
+         await fetch('https://dummyjson.com/products/categories')
           .then(response => response.json())
-          .then(data => setCat(data))
+          .then(data => {
+            setMaxPage(Math.ceil(data.length / DEFAULT_LIMIT_CAT));
+            for (let i = 1; i <= maxPage; i++ ) {
+              if (i === countPage && i === 1) return setCat( data.slice(0, DEFAULT_LIMIT_CAT));
+              else if (i === countPage) return setCat( data.slice(DEFAULT_LIMIT_CAT * (i - 1), DEFAULT_LIMIT_CAT * i))}
+            })
           .catch(() => setIsError(true))
           .finally(() => setIsLoading(false));
-
+        }
+        load();
         return () => setCat([]);
-    }, [])
+    }, [countPage, maxPage])
 
     useEffect( () => {
-       category.map( (item) => {
-          return fetch(`https://dummyjson.com/products/category/${item}`)
+       category.map( async (item) => {
+          return await fetch(`https://dummyjson.com/products/category/${item}`)
           .then(response => response.json())
-          .then(data => setImgSRC( imgSRC => imgSRC.concat(data.products[0].images[1])))
+          .then(data => setImgSRC( prev => prev.concat(data.products[0].images[1])))
           .catch(() => setIsError(true))
           .finally(() => setIsLoading(false)); 
        });
@@ -33,6 +44,7 @@ const Category = () => {
 
     const handlePageChange = (event:React.ChangeEvent<unknown>, page:number) => {
         event.preventDefault();
+        setCountPage(page);
     }
 
     if (isError) return (<h2>Произошла ошибка</h2>)
@@ -40,7 +52,7 @@ const Category = () => {
     return (
       <>
         <Stack spacing={2}>
-            <Pagination count={4} color="secondary" className={style.section} onChange={handlePageChange} />
+            <Pagination count={maxPage} color="secondary" className={style.section} onChange={handlePageChange} />
         </Stack>
         <section className={style.category}>
             { isLoading ? <CircularProgress /> : 

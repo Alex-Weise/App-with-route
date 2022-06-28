@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { MobileStepper, Button } from "@mui/material";
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
@@ -13,7 +13,7 @@ type TCard = {
 }
 
 const Card:FC<TCard> = ({title, img, discr, id}) =>  {
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = useState(0);
   const maxSteps = img.length;
 
   const handleNext = () => {
@@ -22,10 +22,6 @@ const Card:FC<TCard> = ({title, img, discr, id}) =>  {
 
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleStepChange = (step: number) => {
-    setActiveStep(step);
   };
 
     return (
