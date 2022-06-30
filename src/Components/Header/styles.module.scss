@@ -1,6 +1,21 @@
 .tabs {
     text-align: center;
     padding-top: 30px;
+    min-height: auto;
+}
+
+.tab {
+    font-size: 20px;
+    padding: 0;
+    margin-left: 3%;
+    margin-right: 3%;
+    text-transform: none;
+    @media (max-width: 767px) {
+        font-size: 16px;
+    };
+    @media (max-width: 450px) {
+        font-size: 14px;
+    }
 }
 
 .user {
@@ -14,12 +29,28 @@
     font-size: 18px;
     position: absolute;
     top: 5px;
-    right: 5%;
+    right: 3%;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
 }
 
-.hi {
-    margin: 10px;
+.logo {
+    position: absolute;
+    top: 4%;
+    right: 3%;
+    min-width: auto;
+}
+
+.user,
+.visible {
+    @media (max-width: 767px) {
+        display: none;
+    };
+}
+
+.hidden {
+    @media (min-width: 767px) {
+        display: none;
+    }
 }

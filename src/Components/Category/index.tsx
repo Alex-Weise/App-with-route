@@ -1,9 +1,24 @@
 import { CircularProgress, Stack, Pagination } from "@mui/material";
+import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import style from "./styles.module.scss";
 
-const DEFAULT_LIMIT_CAT = 4;
+const DEFAULT_LIMIT_CAT = 5;
+const variantMotion = {
+  visible: (i:number) => ({
+    opacity: 1,
+    x: 0,
+    transition: {
+      delay: i * 0.5,
+      ease: "easeInOut",
+    }
+  }),
+  hidden: {
+    opacity: 0,
+    x: -1000,
+  },
+};
 
 const Category = () => {
     const [category, setCat] = useState<string[]>([]);
@@ -59,10 +74,14 @@ const Category = () => {
              category.map( (item, index) => {
                 let cat = item.slice(0,1).toUpperCase() + item.slice(1);
                 return (
-                <div key={index} className={style.images}>
-                    <img src={imgSRC[index]} alt={item} className={style.img} />
+                <motion.div key={index} className={style.images}
+                  variants={variantMotion}
+                  initial='hidden'
+                  animate='visible'
+                  custom={index}>
+                    {/* <img src={imgSRC[index]} alt={item} className={style.img} /> */}
                     <Link to={`/category/${item}`} className={style.link}>{cat}</Link>
-                </div>)
+                </motion.div>)
             })
             }
         </section>

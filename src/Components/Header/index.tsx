@@ -2,15 +2,11 @@ import { useAuth } from "../../hook/useAuth";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Tabs, Tab, Box, Modal, Button } from "@mui/material";
+import LoginIcon from '@mui/icons-material/Login';
+import LogoutIcon from '@mui/icons-material/Logout';
 import style from "./styles.module.scss";
 import { Login } from "../Login";
-
-const styleSX = {
-    fontSize: 20,
-    textTransform: 'none',
-    mx: 4,
-    p: 0,
-};
+import cx from 'classnames';
 
 const styleModal = {
     position: 'absolute' as 'absolute',
@@ -45,8 +41,9 @@ const Header = () => {
     const handleOutClick = () => {
       signout( () => navigate("/", {replace: true}))
     };
+
     return (
-        <section>  
+        <section>
             <Tabs 
                className={style.tabs}
                value={tabValue}
@@ -56,15 +53,22 @@ const Header = () => {
                aria-label="secondary tabs example"
                centered
             >
-              <Tab value="category" component={Link} to="category" label="Категории" sx={styleSX} />
-              <Tab value="products" component={Link} to="products" label="Все товары" sx={styleSX} />
+              <Tab value="category" component={Link} to="category" label="Категории" className={style.tab} />
+              <Tab value="products" component={Link} to="products" label="Все товары" className={style.tab} />
             </Tabs>
-       { user ? <Box className={style.boxHi}
-                  >
+       { user ?
+            <Box className={style.boxHi}>
               <p className={style.user}>{user}</p>
-              <Button variant="outlined" color="error" onClick={handleOutClick}>Выйти</Button> 
-                </Box> :
-            <Button variant="outlined" color="secondary" onClick={handleOpen} sx={{position: 'absolute', top: '3%', right: '3%'}}>Авторизация</Button>}
+              <Button className={style.visible} variant="outlined" color="error" onClick={handleOutClick}>Выйти</Button>
+              <Button className={ cx(style.hidden, style.logo)} variant="outlined" color="error" onClick={handleOutClick}
+              startIcon={<LogoutIcon />}></Button>  
+            </Box> :
+            <section >
+            <Button className={ cx(style.visible, style.logo)} variant="outlined" color="secondary" onClick={handleOpen} 
+            >Авторизация</Button>
+            <Button className={ cx(style.hidden, style.logo)} variant="outlined" color="secondary" onClick={handleOpen} 
+             startIcon={<LoginIcon />}></Button>
+            </section>}
             <Modal
                open={isOpen}
                onClose={handleClose}
