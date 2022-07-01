@@ -3,15 +3,31 @@
     width: 77%;
     text-align: center;
     font-size: 18px;
-    margin-top: 30px;
-    margin-bottom: 20px;
+    margin: 20px auto;
     padding: 5px;
     border: 2px solid #f2d9f66c;
     background-color: #f2d9f623;;
     border-radius: 5px;
     box-shadow: 0 0 50px -5px #f2d9f6;
     color: #383738d4;
-    
+    @media (max-width: 767px) {
+        font-size: 16px;
+        margin: 10px auto;
+    };
+    @media (max-width: 450px) {
+    };
+}
+.searchHidden {
+    display: inline-block;
+    width: 77%;
+    text-align: center;
+    font-size: 18px;
+    margin: 20px auto;
+    padding: 5px;
+}
+
+.hidden {
+    display: none;
 }
 
 .label {
@@ -28,6 +44,10 @@
     min-height: 30px;
     &:hover {
         background-color: #f2d9f6;
+    };
+    @media (max-width: 767px) {
+        width: 35%;
+        min-height: 20px;
     }
 }
 
@@ -38,14 +58,46 @@
     font-size: 16px;
     color: #383738d4;
     cursor: pointer;
+    @media (max-width: 767px) {
+        font-size: 14px;
+    };
+}
+
+.close {
+    background: #f2d9f66c;
+    border: 1px solid #f2d9f638;
+    border-radius: 2px;
+    position: absolute;
+    right: 12%;
+    padding: revert;
+    font-size: 18px;
+    color: #383738d4;
+    cursor: pointer;
+}
+
+.open {
+    background: #f2d9f66c;
+    border: 1px solid #f2d9f638;
+    border-radius: 2px;
+    font-size: 30px;
+    position: absolute;
+    right: 4%;
+    top: 110px;
+    cursor: pointer;
 }
 
 .reset {
     position: absolute;
+    top: 120px;
     right: 29%;
     background: transparent;
     border: none;
     font-size: larger;
     color: dimgrey;
     cursor: pointer;
+    @media (max-width: 767px) {
+        right: 37%;
+        font-size: 16px;
+        top: 110px;
+    }
 }
