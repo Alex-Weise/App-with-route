@@ -6,14 +6,14 @@ import { Link } from "react-router-dom";
 import style from "./styles.module.scss";
 import { motion } from "framer-motion";
 
-type TCard = {
+type TCards = {
   title: string,
   img: string[],
   discr: string,
   id:number,
 }
 
-const Card:FC<TCard> = forwardRef<HTMLDivElement, TCard>(({title, img, discr, id}, ref) =>  {
+const Cards:FC<TCards> = forwardRef<HTMLDivElement, TCards>(({title, img, discr, id}, ref) =>  {
   const [activeStep, setActiveStep] = useState(0);
   const maxSteps = img.length;
 
@@ -52,5 +52,5 @@ const Card:FC<TCard> = forwardRef<HTMLDivElement, TCard>(({title, img, discr, id
     );
 })
 
-export {Card};
-export const MCard = motion(Card);
+export {Cards};
+export const MCards = motion(Cards);

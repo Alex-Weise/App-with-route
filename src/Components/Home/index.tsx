@@ -1,14 +1,38 @@
 import { useEffect, useState } from "react";
 import { TContent } from "../../type/type";
 import SearchIcon from '@mui/icons-material/Search';
-import { MCard } from "../Cards";
+import { MCards } from "../Cards";
 import { CircularProgress } from "@mui/material";
 import style from "./styles.module.scss";
 import { MSearch } from "../Search";
-import { AnimatePresence, motion, AnimateSharedLayout } from "framer-motion";  
+import { AnimatePresence, motion } from "framer-motion";  
 
 
 export const DEFAULT_REQUEST_LIMIT = 10;
+const searchVariants = {
+    hidden: {
+        opacity: 0,
+        x: 1000,
+        transition: {duration: 2},
+    },
+    visible: {
+        opacity: 1,
+        x: 0,
+        transition: {duration: 1},
+    },
+};
+
+const cardsVariants = {
+    hidden: {
+        y: 100,
+        opacity: 0,
+    },
+    visible: (index:number) => ({
+        y: 0,
+        opacity: 1,
+        transition: {dalay: index * 0.5},
+    }),
+}
 
 const Home = () => {
     const [products, setProducts] = useState<TContent[]>([]);
@@ -19,33 +43,7 @@ const Home = () => {
     const [total, setTotal] = useState(0);
     const DEFAULT_URL = `https://dummyjson.com/products?limit=${DEFAULT_REQUEST_LIMIT}`;
 
-    const handleVisibility = () => setIsVisible(!isVisible);
-
-
-    const searchVariants = {
-        hidden: {
-            opasiti: 0,
-            x: 1000,
-            transition: {duration: 2},
-        },
-        visible: {
-            opasiti: 1,
-            x: 0,
-            transition: {duration: 1},
-        },
-    };
-
-    const cardsVariants = {
-        hidden: {
-            y: 100,
-            opacity: 0,
-        },
-        visible: (index:number) => ({
-            y: 0,
-            opacity: 1,
-            transition: {dalay: index * 0.5},
-        }),
-    }
+    const handleVisibility = () => {setIsVisible(!isVisible)};
 
     useEffect ( () => {
         fetch(DEFAULT_URL)
@@ -91,40 +89,40 @@ const Home = () => {
     if (isError) return (<h2 className={style.err}>Произошла ошибка</h2>);
 
     return (
-        <motion.section
+        <motion.main
           initial="hidden"
           animate="visible"
           exit="hidden" 
           style={{position: 'relative',}}
         >
-            <AnimatePresence initial={false}>
-            {isVisible &&
-                <section>
-                   <MSearch variants={searchVariants} />
-                </section>
-            }
-                <motion.button
+            <motion.button
+                key="buttonSearch"
                 whileHover={{ scale: 1.2 }}
                 whileTap={{ scale: 0.8 }}
                 type="button" className={style.open} onClick={handleVisibility}>
                     <SearchIcon fontSize='inherit' />
-                </motion.button>
+            </motion.button>
+            <AnimatePresence initial={false} exitBeforeEnter>
+                <motion.div className={style.search} variants={searchVariants} key="search">
+                    {isVisible && <MSearch variants={searchVariants} />}
+                </motion.div>
             </AnimatePresence>
             <AnimatePresence>
-                <div className={style.cards}>
+                <div className={style.cards} key="cards">
                   { isLoading ? <CircularProgress /> : 
                   products.map( (item, i) => {
                     return (
-                        <MCard 
+                        <MCards 
                         whileInView="visible"
                         custom={i}
                         variants={cardsVariants}
-                        title={item.brand} img={item.images} id={item.id}
+                        title={item.brand} 
+                        img={item.images} id={item.id}
                         discr={item.description} key={item.id}/>
                     )})}
                 </div>
             </AnimatePresence>
-        </motion.section>
+        </motion.main>
     );
 };
 export {Home};

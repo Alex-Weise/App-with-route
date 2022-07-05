@@ -2,7 +2,7 @@ import { CircularProgress, Button } from "@mui/material";
 import ReplyIcon from '@mui/icons-material/Reply';
 import { useState, useEffect, FC } from "react";
 import { TContent } from "../../../type/type";
-import { Card } from "../../Cards";
+import { Cards } from "../../Cards";
 import { useParams, useNavigate } from "react-router-dom";
 import style from "./styles.module.scss"
 
@@ -31,7 +31,7 @@ const CategoryCards:FC = () => {
         <section className={style.cards}>
             {isLoading ? <CircularProgress /> : 
             categories.map( (item) => {
-                return (<Card title={item.brand} img={item.images} id={item.id}
+                return (<Cards title={item.brand} img={item.images} id={item.id}
                   discr={item.description} key={item.id}/>)})}
         </section>
        </>

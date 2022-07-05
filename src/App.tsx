@@ -1,6 +1,5 @@
-import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import './App.css';
+import './App.scss';
 import { GlobalPage } from './Components/GlobalPage';
 import { Category } from './Components/Category';
 import { CategoryCards } from './Components/Category/CategoryCards';

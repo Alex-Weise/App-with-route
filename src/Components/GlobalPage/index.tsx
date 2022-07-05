@@ -7,12 +7,12 @@ const GlobalPage = () => {
 
     return (
         <>
-          <header className={style.header}>
+          <div className={style.header}>
             <Header />
-          </header>
-          <main className={style.main}>
+          </div>
+          <div className={style.main}>
               <Outlet />
-          </main>
+          </div>
           <footer className={style.footer}> 
              <div className={style.foottext}>С заботой о природе. 2022</div>
           </footer>

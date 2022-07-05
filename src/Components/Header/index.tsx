@@ -7,6 +7,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import style from "./styles.module.scss";
 import { Login } from "../Login";
 import cx from 'classnames';
+// import IMg from '../..assets/img.jpg';
 
 const styleModal = {
     position: 'absolute' as 'absolute',
@@ -43,7 +44,10 @@ const Header = () => {
     };
 
     return (
-        <section style={{position: "relative"}}>
+        <header style={{position: "relative"}}>
+          <div>
+            {/* <img src={IMg} alt="LOGO" /> */}
+          </div>
             <Tabs 
                className={style.tabs}
                value={tabValue}
@@ -64,7 +68,7 @@ const Header = () => {
               startIcon={<LogoutIcon />}></Button>  
             </Box> :
             <section >
-            <Button className={ cx(style.visible, style.logo)} variant="outlined" color="secondary" onClick={handleOpen} 
+            <Button classes={{root: cx(style.visible, style.logo)}} variant="outlined" color="secondary" onClick={handleOpen} 
             >Авторизация</Button>
             <Button className={ cx(style.hidden, style.logo)} variant="outlined" color="secondary" onClick={handleOpen} 
              startIcon={<LoginIcon />}></Button>
@@ -79,7 +83,7 @@ const Header = () => {
                     <Login close={handleClose}/>
                 </Box>
             </Modal>
-        </section>
+        </header>
     )
 };
 export {Header};

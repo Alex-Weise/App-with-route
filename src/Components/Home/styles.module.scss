@@ -1,3 +1,5 @@
+@import "src/App.scss";
+
 .cards {
     display: flex;
     flex-wrap: wrap;
@@ -20,15 +22,25 @@
     border: 1px solid #f2d9f638;
     border-radius: 50%;
     font-size: 30px;
-    position: fixed;
-    top: 105px;
+    position: absolute;
+    top: 15px;
     right: 4%;
     cursor: pointer;
-    @media (max-width: 767px) {
-        top: 90px;
+};
+
+.search {
+    height: 70px;
+};
+
+@include breakpoint (sm) {
+    .open {
+        top: 5px;
         right: 3%;
     };
-    @media (max-width: 610px) {
+};
+
+@include breakpoint (s) {
+    .open {
         display: none;
     };
 };

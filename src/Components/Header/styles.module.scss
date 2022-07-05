@@ -1,3 +1,5 @@
+@import "src/App.scss";
+
 .tabs {
     text-align: center;
     padding-top: 30px;
@@ -10,12 +12,6 @@
     margin-left: 3%;
     margin-right: 3%;
     text-transform: none;
-    @media (max-width: 767px) {
-        font-size: 16px;
-    };
-    @media (max-width: 450px) {
-        font-size: 14px;
-    }
 }
 
 .user {
@@ -33,9 +29,6 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    @media (max-width: 767px) {
-        top: 15%;
-    };
 }
 
 .logo {
@@ -43,18 +36,30 @@
     top: 15%;
     right: 3%;
     min-width: auto;
-    padding: 4px 0 4px 10px;
-}
-
-.user,
-.visible {
-    @media (max-width: 767px) {
-        display: none;
-    };
 }
 
 .hidden {
+    padding: 4px 0 4px 10px;
     @media (min-width: 767px) {
         display: none;
     }
 }
+
+@include breakpoint (sm) {
+    .tab {
+        font-size: 16px;
+    };
+    .boxHi {
+        top: 15%;
+    };
+    .user,
+    .visible {
+        display: none;
+    };
+};
+
+@include breakpoint (xs) {
+    .tab {
+        font-size: 14px;
+    };
+};

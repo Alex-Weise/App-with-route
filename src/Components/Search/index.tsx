@@ -44,5 +44,3 @@ const Search:FC<TProp> = forwardRef<HTMLElement, TProp>(({value}, ref) => {
 
 export {Search};
 export const MSearch = motion(Search);
-
-// className={!isVisible && style.hidden}

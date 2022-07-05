@@ -1,3 +1,5 @@
+@import "src/App.scss";
+
 .category {
     font-size: 20px;
     display: flex;
@@ -8,12 +10,6 @@
     margin-right: auto;
     box-shadow: 0 10px 40px -20px;
     border-radius: 10px;
-    @media (max-width: 767px) {
-        font-size: 18px;
-    };
-    @media (max-width: 450px) {
-        font-size: 16px;
-    }
 }
 
 .section {
@@ -25,12 +21,6 @@
     margin: 4%;
     display: grid;
     gap: 5%;
-    @media (max-width: 767px) {
-        margin: 3%;
-    };
-    @media (max-width: 450px) {
-        margin: 2%;
-    }
 }
 
 .img {
@@ -44,3 +34,21 @@
 .link {
     text-decoration: none;
 }
+
+@include breakpoint (sm) {
+    .text {
+        margin: 3%;
+    };
+    .category {
+        font-size: 18px;
+    };
+};
+
+@include breakpoint (xs) {
+    .text {
+        margin: 2%;
+    };
+    .category {
+        font-size: 16px;
+    };
+};

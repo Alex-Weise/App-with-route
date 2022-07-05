@@ -4,7 +4,7 @@ import { TContent } from "../../type/type";
 import { Search } from "../Search";
 import { CircularProgress, Button } from "@mui/material";
 import ReplyIcon from '@mui/icons-material/Reply';
-import { Card } from "../Cards";
+import { Cards } from "../Cards";
 import style from "../Home/styles.module.scss";
 import { DEFAULT_REQUEST_LIMIT } from "../Home";
 
@@ -81,7 +81,7 @@ const SearchPage = () => {
             <div className={style.cards}>
             { isLoading ? <CircularProgress /> : 
             products.map( (item) => {
-                return (<Card title={item.brand} img={item.images} id={item.id}
+                return (<Cards title={item.brand} img={item.images} id={item.id}
                   discr={item.description} key={item.id}/>)})}
             </div>
             </section>
