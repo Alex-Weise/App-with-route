@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import style from "./styles.module.scss";
 
 const DEFAULT_LIMIT_CAT = 5;
+const colors = ["#FF008C", "#D309E1", "#9C1AFF", "#7700FF", "#4400FF"];
 const variantMotion = {
   visible: (i:number) => ({
     opacity: 1,
@@ -26,6 +27,7 @@ const Category = () => {
     const [isError, setIsError] = useState(false);
     const [countPage, setCountPage] = useState(1);
     const [maxPage, setMaxPage] = useState(1);
+    const [imagesAndCat, setImagesAndCat] = useState<{}[]>([]);
 
     useEffect( () => {
         const load = async () => {
@@ -45,16 +47,19 @@ const Category = () => {
     }, [countPage, maxPage])
 
     // useEffect( () => {
-    //    category.map( async (item) => {
+    //    category.map( async (item:string) => {
     //       return await fetch(`https://dummyjson.com/products/category/${item}`)
     //       .then(response => response.json())
-    //       .then(data => setImgSRC( prev => prev.concat(data.products[0].images[1])))
+    //       .then(data => {
+    //         if (imagesAndCat.includes(item)) return data;
+    //         else {}
+    //       })
     //       .catch(() => setIsError(true))
     //       .finally(() => setIsLoading(false)); 
     //    });
 
-    //    return () => setImgSRC([])
     // }, [category])
+
     // const loadIMG = async (str:string) => {
     //   const response = await fetch(`https://dummyjson.com/products/category/${str}`);
     //   const data = await response.json();
@@ -83,8 +88,10 @@ const Category = () => {
                   variants={variantMotion}
                   initial='hidden'
                   animate='visible'
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
                   custom={index}>
-                    <Link to={`/category/${item}`} className={style.link}>{cat}</Link>
+                    <Link to={`/category/${item}`} className={style.link} style={{color: colors[index]}}>{cat}</Link>
                 </motion.div>)
             })
             }

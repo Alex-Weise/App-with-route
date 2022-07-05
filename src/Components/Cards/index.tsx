@@ -1,9 +1,10 @@
-import React, { FC, useState } from "react";
+import React, { FC, forwardRef, useState } from "react";
 import { MobileStepper, Button } from "@mui/material";
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import { Link } from "react-router-dom";
-import style from "./styles.module.scss"
+import style from "./styles.module.scss";
+import { motion } from "framer-motion";
 
 type TCard = {
   title: string,
@@ -12,7 +13,7 @@ type TCard = {
   id:number,
 }
 
-const Card:FC<TCard> = ({title, img, discr, id}) =>  {
+const Card:FC<TCard> = forwardRef<HTMLDivElement, TCard>(({title, img, discr, id}, ref) =>  {
   const [activeStep, setActiveStep] = useState(0);
   const maxSteps = img.length;
 
@@ -25,7 +26,7 @@ const Card:FC<TCard> = ({title, img, discr, id}) =>  {
   };
 
     return (
-        <div className={style.card}>
+        <div className={style.card} ref={ref}>
           <div className={style.image}>
             <img src={img[activeStep]} alt={title} className={style.img}/>
             <MobileStepper
@@ -49,6 +50,7 @@ const Card:FC<TCard> = ({title, img, discr, id}) =>  {
           </span>
         </div>
     );
-}
+})
 
 export {Card};
+export const MCard = motion(Card);

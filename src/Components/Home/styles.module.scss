@@ -14,3 +14,21 @@
     display: grid;
     gap: 10px;
 };
+
+.open {
+    background: #f2d9f66c;
+    border: 1px solid #f2d9f638;
+    border-radius: 50%;
+    font-size: 30px;
+    position: fixed;
+    top: 105px;
+    right: 4%;
+    cursor: pointer;
+    @media (max-width: 767px) {
+        top: 90px;
+        right: 3%;
+    };
+    @media (max-width: 610px) {
+        display: none;
+    };
+};

@@ -1,10 +1,11 @@
 .search {
     display: inline-block;
+    overflow: hidden;
+    position: relative;
     width: 77%;
     text-align: center;
     font-size: 18px;
     margin: 20px auto;
-    padding: 5px;
     border: 2px solid #f2d9f66c;
     background-color: #f2d9f623;;
     border-radius: 5px;
@@ -12,26 +13,18 @@
     color: #383738d4;
     @media (max-width: 767px) {
         font-size: 16px;
+        width: 70%;
         margin: 10px auto;
     };
-    @media (max-width: 450px) {
+    @media (max-width: 610px) {
+        width: 90%;
+
     };
 }
-.searchHidden {
-    display: inline-block;
-    width: 77%;
-    text-align: center;
-    font-size: 18px;
-    margin: 20px auto;
-    padding: 5px;
-}
 
-.hidden {
-    display: none;
-}
-
-.label {
-    margin: 20px;
+.form {
+    display: flex;
+    justify-content: space-between;
 }
 
 .input {
@@ -39,65 +32,64 @@
     font-size: 16px;
     border: none;
     background: transparent;
-    border-bottom: 2px solid #ce93d8;
-    width: 55%;
-    min-height: 30px;
+    border-radius: 5px;
+    width: 100%;
     &:hover {
-        background-color: #f2d9f6;
+        background-color: #f2d9f66c;
     };
     @media (max-width: 767px) {
-        width: 35%;
-        min-height: 20px;
-    }
+        font-size: 14px;
+        width: 65%;
+    };
+    @media (max-width: 900px) {
+        width: 85%;
+    };
 }
 
 .button {
+    text-align: end;
     background: #f2d9f66c;
     border: 1px solid #f2d9f638;
     border-radius: 2px;
+    width: 15%;
     font-size: 16px;
     color: #383738d4;
     cursor: pointer;
     @media (max-width: 767px) {
         font-size: 14px;
+        width: 20%;
     };
-}
-
-.close {
-    background: #f2d9f66c;
-    border: 1px solid #f2d9f638;
-    border-radius: 2px;
-    position: absolute;
-    right: 12%;
-    padding: revert;
-    font-size: 18px;
-    color: #383738d4;
-    cursor: pointer;
-}
-
-.open {
-    background: #f2d9f66c;
-    border: 1px solid #f2d9f638;
-    border-radius: 2px;
-    font-size: 30px;
-    position: absolute;
-    right: 4%;
-    top: 110px;
-    cursor: pointer;
+    @media (max-width: 610px) {
+        display: none;
+    };
 }
 
 .reset {
     position: absolute;
-    top: 120px;
-    right: 29%;
+    right: 15%;
     background: transparent;
     border: none;
     font-size: larger;
     color: dimgrey;
     cursor: pointer;
     @media (max-width: 767px) {
-        right: 37%;
+        right: 20%;
         font-size: 16px;
-        top: 110px;
-    }
+    };
+    @media (max-width: 610px) {
+        right: 10%;
+    };
+    // @media (max-width: 900px) {
+    //     right: 32%;
+    // };
+}
+
+.hidden {
+    display: none;
+
+    @media (max-width: 610px) {
+        display: block;
+        background-color: #f2d9f66c;
+        border: none;
+    };
 }

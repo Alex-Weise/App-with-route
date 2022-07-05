@@ -43,7 +43,7 @@ const Header = () => {
     };
 
     return (
-        <section>
+        <section style={{position: "relative"}}>
             <Tabs 
                className={style.tabs}
                value={tabValue}
