@@ -1,38 +1,37 @@
 import { useEffect, useState } from "react";
 import { TContent } from "../../type/type";
 import SearchIcon from '@mui/icons-material/Search';
-import { MCards } from "../Cards";
+import { Cards } from "../Cards";
 import { CircularProgress } from "@mui/material";
 import style from "./styles.module.scss";
 import { MSearch } from "../Search";
-import { AnimatePresence, motion } from "framer-motion";  
+import { motion } from "framer-motion";  
 
 
 export const DEFAULT_REQUEST_LIMIT = 10;
+
 const searchVariants = {
     hidden: {
-        opacity: 0,
-        x: 1000,
-        transition: {duration: 2},
+        clipPath: "circle(20px at 105% 50%)",
+        transition: {
+          duration: 1,
+          type: "spring",
+          stiffness: 200,
+          damping: 40,
+          bounce: 0.5,
+        },
     },
     visible: {
-        opacity: 1,
-        x: 0,
-        transition: {duration: 1},
+        clipPath: "circle(2200px at 100% 100%)",
+        transition: {
+            duration: 1,
+            type: "spring",
+            stiffness: 100,
+            damping: 40,
+            bounce: 0.5,
+        },
     },
 };
-
-const cardsVariants = {
-    hidden: {
-        y: 100,
-        opacity: 0,
-    },
-    visible: (index:number) => ({
-        y: 0,
-        opacity: 1,
-        transition: {dalay: index * 0.5},
-    }),
-}
 
 const Home = () => {
     const [products, setProducts] = useState<TContent[]>([]);
@@ -89,40 +88,33 @@ const Home = () => {
     if (isError) return (<h2 className={style.err}>Произошла ошибка</h2>);
 
     return (
-        <motion.main
-          initial="hidden"
-          animate="visible"
-          exit="hidden" 
-          style={{position: 'relative',}}
+        <main
+          style={{position: 'relative'}}
         >
-            <motion.button
-                key="buttonSearch"
+            <div className={style.search}>
+                <MSearch 
+                    initial={false}
+                    animate={isVisible ? "visible" : "hidden"}
+                    variants={searchVariants}
+                />
+                <motion.button
                 whileHover={{ scale: 1.2 }}
                 whileTap={{ scale: 0.8 }}
                 type="button" className={style.open} onClick={handleVisibility}>
                     <SearchIcon fontSize='inherit' />
-            </motion.button>
-            <AnimatePresence initial={false} exitBeforeEnter>
-                <motion.div className={style.search} variants={searchVariants} key="search">
-                    {isVisible && <MSearch variants={searchVariants} />}
-                </motion.div>
-            </AnimatePresence>
-            <AnimatePresence>
-                <div className={style.cards} key="cards">
+                </motion.button>
+            </div>
+            <div className={style.cards} key="cards">
                   { isLoading ? <CircularProgress /> : 
                   products.map( (item, i) => {
                     return (
-                        <MCards 
-                        whileInView="visible"
-                        custom={i}
-                        variants={cardsVariants}
+                        <Cards 
                         title={item.brand} 
                         img={item.images} id={item.id}
                         discr={item.description} key={item.id}/>
                     )})}
-                </div>
-            </AnimatePresence>
-        </motion.main>
+            </div>
+        </main>
     );
 };
 export {Home};

@@ -26,10 +26,12 @@
     top: 15px;
     right: 4%;
     cursor: pointer;
+    z-index: 1;
 };
 
 .search {
     height: 70px;
+    overflow: hidden;
 };
 
 @include breakpoint (sm) {
