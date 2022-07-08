@@ -7,7 +7,7 @@
 }
 
 .tab {
-    font-size: 20px;
+    font-size: 18px;
     padding: 0;
     margin-left: 3%;
     margin-right: 3%;
@@ -22,7 +22,7 @@
 }
 
 .boxHi {
-    font-size: 18px;
+    font-size: 16px;
     position: absolute;
     top: 5px;
     right: 3%;
@@ -45,6 +45,28 @@
     }
 }
 
+.img {
+    position: absolute;
+    top: 10px;
+    width: 180px;
+    height: 90px;
+    border-radius: 8%;
+    background: transparent;
+    transform: rotate(-25deg);
+};
+
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    height: 50%;
+    background: linear-gradient(0deg, rgba(159,216,237,1) 0%, rgba(255,204,188,1) 100%);    border: 2px solid #000;
+    border-radius: 2%;
+    box-shadow: 0 0 50px 5px;
+};
+
 @include breakpoint (sm) {
     .tab {
         font-size: 16px;
@@ -56,20 +78,42 @@
     .visible {
         display: none;
     };
+    .img {
+        width: 120px;
+        height: 70px;
+    };
+    .modal {
+        height: 55%;
+        width: 55%;
+    };
 };
 
 @include breakpoint (xs) {
     .tab {
         font-size: 14px;
     };
+    .img {
+        width: 80px;
+        height: 50px;
+        top: -5px;
+        left: -10px;
+    };
+    .modal {
+        height: 70%;
+        width: 70%;
+    }
 };
 
 @include breakpointMin (lg) {
     .tab {
-        font-size: 26px;
+        font-size: 22px;
     };
     .logo,
     .boxHi {
-        font-size: 22px;
-    }
+        font-size: 18px;
+    };
+    .img {
+        width: 250px;
+        height: 120px;
+    };
 };

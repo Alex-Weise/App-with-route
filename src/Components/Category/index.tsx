@@ -87,7 +87,7 @@ const Category = () => {
                 let image = imageAndCat.find(i => i[0] === item);
                 return (
                 <motion.div key={index} className={style.text}
-                  onClick={ () => navigate(`/category/${item}`)}
+                  onClick={ () => navigate(`/category/${item}`, {replace: true})}
                   variants={variantMotion}
                   initial='hidden'
                   animate='visible'

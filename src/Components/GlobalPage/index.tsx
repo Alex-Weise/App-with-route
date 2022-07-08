@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { Header } from "../Header";
 import style from "./styles.module.scss";
+import heart from "../../assets/icon-heart.png";
 
 
 const GlobalPage = () => {
@@ -14,7 +15,7 @@ const GlobalPage = () => {
               <Outlet />
           </div>
           <footer className={style.footer}> 
-             <div className={style.foottext}>С заботой о природе. 2022</div>
+             <div className={style.foottext}>С заботой о природе.<img className={style.img} src={heart} alt="Heart"/> 2022</div>
           </footer>
         </>
     );

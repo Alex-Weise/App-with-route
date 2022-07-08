@@ -25,7 +25,7 @@ const Search:FC<TProp> = forwardRef<HTMLElement, TProp>(({value}, ref) => {
         <form 
           onSubmit={handleSubmit}
           className={style.form}>
-            <input name="search" className={style.input} placeholder="Поиск"></input>
+            <input name="search" className={style.input} placeholder="Поиск" ></input>
           <motion.button
            whileHover={{ scale: 1.2 }}
            whileTap={{ scale: 0.8 }}

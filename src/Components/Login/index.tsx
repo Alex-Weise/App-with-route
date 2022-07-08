@@ -19,7 +19,7 @@ const Login:FC<TProp>  = ({close}) => {
     const location = useLocation() as LocationProps;
     const { signin } = useAuth();
 
-    const fromPage = location.state?.from?.pathname || '/';
+    const fromPage = location.state?.from?.pathname || '/products';
 
     const handleFormSubmit = (event:any) => {
         event.preventDefault();
@@ -34,7 +34,7 @@ const Login:FC<TProp>  = ({close}) => {
             <form onSubmit={handleFormSubmit}>
                 <label className={style.login}>
                     <h3>Для авторизации введите Имя:</h3>
-                  <input name="username" className={style.input}></input>
+                  <input name="username" className={style.input} autoFocus={true}></input>
                 </label>
                 <button type="submit" className={style.button}>Запомнить <CheckIcon sx={{color: "black", fontSize: 18}}/></button>
             </form>

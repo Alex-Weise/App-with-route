@@ -1,18 +1,28 @@
+@import "src/App.scss";
 .form {
     text-align: center;
+    // margin: 25% 10%;
+    position: relative;
+    padding: 10px;
 }
 
 .login {
     font-size: 18px;
+    font-family: cursive;
+    margin: auto 10px;
 }
 .button {
-    margin-left: 4px;
+    margin-left: 5px;
     background-color: transparent;
     border: none;
+    border-bottom: 2px solid black;
+    box-shadow: 3px -2px 20px -4px;
+    border-radius: 6px;
+    padding: 0 1px 4px 5px;
     cursor: pointer;
     font-size: 16px;
     &:hover {
-        background-color: #a2d89375;
+        background-color: #d398ac;
     }
 }
 
@@ -20,6 +30,34 @@
     background-color: transparent;
     margin: 10px;
     border: none;
-    border-bottom: 2px solid #a2d893;
-    width: 30%;
+    border-bottom: 2px solid #ec407a;
+    border-radius: 8px;
+    width: 50%;
+};
+
+@include breakpoint (sm) {
+    .form {
+        // margin: 20% 10%;
+    };
+    .login {
+        font-size: 16px;
+    };
+    .input {
+        width: 80%;
+    }
+};
+
+@include breakpoint (xs) {
+    .form {
+        // margin: 10% 10%;
+    };
+    .login {
+        font-size: 12px;
+    };
+    .button {
+        font-size: 12px;
+    };
+    .input {
+        margin: 5px;
+    }
 }

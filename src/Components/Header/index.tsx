@@ -7,18 +7,21 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import style from "./styles.module.scss";
 import { Login } from "../Login";
 import cx from 'classnames';
-// import IMg from '../..assets/img.jpg';
+import IMg from '../../assets/img.jpg';
+import { motion } from "framer-motion";
 
-const styleModal = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '30%',
-    bgcolor: 'darkGrey',
-    border: '2px solid #000',
-    boxShadow: 24,
-    p: 4,
+const logoVariants = {
+  spring: {
+    rotate: -25,
+    transition: {
+      delay: 1.5,
+      type: "spring",
+      stiffness: 350,
+      bounce: 0.3,
+      damping: 25,
+      mass: 25,
+    },
+  },
 };
 
 const Header = () => {
@@ -46,7 +49,9 @@ const Header = () => {
     return (
         <header style={{position: "relative"}}>
           <div>
-            {/* <img src={IMg} alt="LOGO" /> */}
+            <motion.img src={IMg} alt="LOGO" className={style.img}
+              animate={logoVariants.spring}
+             />
           </div>
             <Tabs 
                className={style.tabs}
@@ -79,9 +84,9 @@ const Header = () => {
                aria-labelledby="modal-modal-title"
                aria-describedby="modal-modal-description"
             >
-                <Box sx={styleModal}>
-                    <Login close={handleClose}/>
-                </Box>
+              <div className={style.modal}>
+                  <Login close={handleClose}/>
+              </div>
             </Modal>
         </header>
     )

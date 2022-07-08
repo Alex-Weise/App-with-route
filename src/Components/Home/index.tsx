@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { TContent } from "../../type/type";
 import SearchIcon from '@mui/icons-material/Search';
-import { Cards } from "../Cards";
+import { MCards } from "../Cards";
 import { CircularProgress } from "@mui/material";
 import style from "./styles.module.scss";
 import { MSearch } from "../Search";
 import { motion } from "framer-motion";  
 
 
-export const DEFAULT_REQUEST_LIMIT = 10;
+export const DEFAULT_REQUEST_LIMIT = 15;
 
 const searchVariants = {
     hidden: {
@@ -106,9 +106,11 @@ const Home = () => {
             </div>
             <div className={style.cards} key="cards">
                   { isLoading ? <CircularProgress /> : 
-                  products.map( (item, i) => {
+                  products.map( (item) => {
                     return (
-                        <Cards 
+                        <MCards 
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}
                         title={item.brand} 
                         img={item.images} id={item.id}
                         discr={item.description} key={item.id}/>

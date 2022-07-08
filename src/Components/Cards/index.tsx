@@ -1,7 +1,4 @@
-import React, { FC, forwardRef, useState } from "react";
-import { MobileStepper, Button } from "@mui/material";
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
+import React, { FC, forwardRef } from "react";
 import { Link } from "react-router-dom";
 import style from "./styles.module.scss";
 import { motion } from "framer-motion";
@@ -14,38 +11,14 @@ type TCards = {
 }
 
 const Cards:FC<TCards> = forwardRef<HTMLDivElement, TCards>(({title, img, discr, id}, ref) =>  {
-  const [activeStep, setActiveStep] = useState(0);
-  const maxSteps = img.length;
-
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
 
     return (
         <div className={style.card} ref={ref}>
           <div className={style.image}>
-            <img src={img[activeStep]} alt={title} className={style.img}/>
-            <MobileStepper
-              className={style.stepper}
-              steps={maxSteps}
-              position="static"
-              activeStep={activeStep}
-              nextButton={
-                <Button size="small" color="secondary" onClick={handleNext} disabled={activeStep === maxSteps - 1}>
-                  <KeyboardArrowRight />
-                </Button>}
-              backButton={
-                <Button size="small" color="secondary" onClick={handleBack} disabled={activeStep === 0}>
-                   <KeyboardArrowLeft />
-                </Button>} 
-              />
+            <img src={img[0]} alt={title} className={style.img}/>
           </div>
-          <span>
-            <h3><Link to={`/products/${id}`} className={style.title}> {title} </Link></h3>
+          <span style={{padding: '10px 5px 2px 5px'}}>
+            <Link to={`/products/${id}`} className={style.title}> {title} </Link>
             <p className={style.text}>{discr}</p>
           </span>
         </div>

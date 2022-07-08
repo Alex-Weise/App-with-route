@@ -40,12 +40,18 @@
     };
     .search {
         height: 50px;
-    }
+    };
+    .cards {
+        width: 85%;
+    };
 };
 
 @include breakpoint (s) {
     .open {
         display: none;
+    };
+    .cards {
+        width: 95%;
     };
 };
 
