@@ -40,7 +40,7 @@
 
 .hidden {
     padding: 4px 0 4px 10px;
-    @media (min-width: 767px) {
+    @include breakpointMin (sm) {
         display: none;
     }
 }
@@ -62,4 +62,14 @@
     .tab {
         font-size: 14px;
     };
+};
+
+@include breakpointMin (lg) {
+    .tab {
+        font-size: 26px;
+    };
+    .logo,
+    .boxHi {
+        font-size: 22px;
+    }
 };

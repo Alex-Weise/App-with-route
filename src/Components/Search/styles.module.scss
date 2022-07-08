@@ -1,3 +1,4 @@
+@import "src/App.scss";
 .search {
     display: inline-block;
     overflow: hidden;
@@ -12,16 +13,6 @@
     border-radius: 5px;
     box-shadow: 0 0 50px -5px #f2d9f6;
     color: #383738d4;
-    @media (max-width: 767px) {
-        font-size: 16px;
-        min-height: 16px;
-        width: 70%;
-        margin: 10px auto;
-    };
-    @media (max-width: 610px) {
-        width: 90%;
-
-    };
 }
 
 .form {
@@ -41,13 +32,6 @@
     &:hover {
         background-color: #f2d9f66c;
     };
-    @media (max-width: 767px) {
-        font-size: 14px;
-        width: 65%;
-    };
-    @media (max-width: 900px) {
-        width: 85%;
-    };
 }
 
 .button {
@@ -60,13 +44,6 @@
     font-size: 16px;
     color: #383738d4;
     cursor: pointer;
-    @media (max-width: 767px) {
-        font-size: 14px;
-        width: 20%;
-    };
-    @media (max-width: 610px) {
-        display: none;
-    };
 }
 
 .reset {
@@ -77,21 +54,60 @@
     font-size: larger;
     color: dimgrey;
     cursor: pointer;
-    @media (max-width: 767px) {
-        right: 20%;
-        font-size: 16px;
-    };
-    @media (max-width: 610px) {
-        right: 10%;
-    };
 }
 
 .hidden {
     display: none;
+}
 
-    @media (max-width: 610px) {
+@include breakpoint (sm) {
+    .search {
+        font-size: 16px;
+        min-height: 16px;
+        width: 70%;
+        margin: 10px auto;
+    };
+    .input {
+        font-size: 14px;
+        width: 65%;
+    };
+    .button {
+        font-size: 14px;
+        width: 20%;
+    };
+    .reset {
+        right: 20%;
+        font-size: 16px;
+    };
+};
+
+@include breakpoint (s) {
+    .search {
+        width: 90%;
+    };
+    .button {
+        display: none;
+    };
+    .reset {
+        right: 10%;
+    };
+    .hidden {
         display: block;
         background-color: #f2d9f66c;
         border: none;
     };
-}
+};
+
+@include breakpoint (md) {
+    .input {
+        width: 85%;
+    };
+};
+
+@include breakpointMin (lg) {
+    .input,
+    .button,
+    .search {
+        font-size: 24px
+    };
+};

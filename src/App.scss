@@ -13,4 +13,13 @@ $breakpoints: (
   @media (max-width: ($breakpoint-value)) {
     @content;
   }
-}
+};
+
+@mixin breakpointMin($breakpoint) {
+
+  $breakpoint-value: map-get($breakpoints, $breakpoint);
+  
+  @media (min-width: ($breakpoint-value)) {
+    @content;
+  }
+};

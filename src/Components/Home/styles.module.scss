@@ -26,7 +26,6 @@
     top: 15px;
     right: 4%;
     cursor: pointer;
-    z-index: 1;
 };
 
 .search {
@@ -39,6 +38,9 @@
         top: 5px;
         right: 3%;
     };
+    .search {
+        height: 50px;
+    }
 };
 
 @include breakpoint (s) {
@@ -46,3 +48,12 @@
         display: none;
     };
 };
+
+@include breakpointMin (lg) {
+    .open {
+        font-size: 36px;
+    };
+    // .search {
+    //     height: 100px;
+    // };
+}
