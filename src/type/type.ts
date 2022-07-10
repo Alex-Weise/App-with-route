@@ -9,3 +9,13 @@ export type TContent = {
     images: string[],
     id: number,
 };
+
+export type TComments = {
+    id: number,
+    body: string,
+    postId: number,
+    user: {
+        id: number,
+        username: string,
+    },
+};

@@ -1,3 +1,4 @@
+@import "src/App.scss";
 .cards {
     display: flex;
     flex-wrap: wrap;
@@ -8,4 +9,34 @@
     margin-right: auto;
     box-shadow: 0 10px 40px -20px;
     border-radius: 10px;
+};
+
+.back {
+    display: flex;
+    font-size: 18px;
+    margin: 10px auto 10px 13%;
+};
+
+@include breakpoint (sm) {
+    .cards {
+        width: 85%;
+    };
+    .back {
+        font-size: 14px;
+    };
+};
+
+@include breakpoint (s) {
+    .cards {
+        width: 95%;
+    };
+    .back {
+        font-size: 12px;
+    };
+};
+
+@include breakpointMin (lg) {
+    .back {
+        font-size: 20px;
+    };
 }

@@ -43,8 +43,8 @@ const Header = () => {
     };
 
     const handleOutClick = () => {
-      signout( () => navigate("/", {replace: true}))
-    };
+      signout( () => navigate("/products", {replace: true}))
+    };    
 
     return (
         <header style={{position: "relative"}}>
@@ -85,7 +85,7 @@ const Header = () => {
                aria-describedby="modal-modal-description"
             >
               <div className={style.modal}>
-                  <Login close={handleClose}/>
+                  <Login close={handleClose} from={location.pathname} />
               </div>
             </Modal>
         </header>

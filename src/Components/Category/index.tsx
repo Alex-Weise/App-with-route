@@ -11,7 +11,7 @@ const variantMotion = {
     opacity: 1,
     x: 0,
     transition: {
-      delay: i * 0.5,
+      delay: (i + 0.5) * 0.5,
       ease: "easeInOut",
     }
   }),
@@ -26,7 +26,7 @@ const Category = () => {
     const [category, setCat] = useState<string[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isError, setIsError] = useState(false);
-    const [countPage, setCountPage] = useState(1);
+    const [countPage, setCountPage] = useState<number>(1);
     const [maxPage, setMaxPage] = useState(1);
     const [imageAndCat, setImageAndCat] = useState<string[][]>([]);
 
@@ -61,11 +61,12 @@ const Category = () => {
           })
       };
 
-       category.map( (item:string) => {
+      category.forEach( (item:string) => {
         loadIMG(item);
        });
 
        return () => {setImageAndCat([])}
+// eslint-disable-next-line
     }, [category])
 
     const handlePageChange = (event:React.ChangeEvent<unknown>, page:number) => {
@@ -87,7 +88,7 @@ const Category = () => {
                 let image = imageAndCat.find(i => i[0] === item);
                 return (
                 <motion.div key={index} className={style.text}
-                  onClick={ () => navigate(`/category/${item}`, {replace: true})}
+                  onClick={ () => navigate(`/category/${item}`)}
                   variants={variantMotion}
                   initial='hidden'
                   animate='visible'

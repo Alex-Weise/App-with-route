@@ -10,7 +10,7 @@ const Autorise:FC<TProp> = ({children}) => {
     const { user } = useAuth();
 
     if (!user) {
-        return <Navigate to="/login" state={{form: location}} />
+        return <Navigate to="/login" state={{from: location}} />
     }
 
     return <>{children}</>
