@@ -7,6 +7,7 @@ import { TComments, TContent } from "../../type/type";
 import { useParams, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import style from "../OneCard/styles.module.scss";
+import { Comments } from "../Comments";
 
 const StyledRating = styled(Rating)({
     '& .MuiRating-iconFilled': {
@@ -71,7 +72,7 @@ const OneCard:FC = () => {
   useEffect( () => {
     fetch(`https://dummyjson.com/comments/post/${id}`)
       .then(res => res.json())
-      .then(data => setComments(data))
+      .then(data => setComments(data.comments))
       .catch(() => setIsError(true))
       .finally(() => setIsLoading(false));
   }, [id])
@@ -82,12 +83,12 @@ const OneCard:FC = () => {
   };
 
   const imageIndex = wrap(0, imageURL.length, page);
-console.log(comments);
+
   if (isError) return (<h2 className={style.err}>
     <Button onClick={goBack} color="secondary" startIcon={<ReplyIcon />}>Назад</Button>
     Произошла ошибка
     </h2>);
-
+    
     return (
         <section className={style.one_card}>
           {isLoading ? <CircularProgress /> : 
@@ -155,7 +156,8 @@ console.log(comments);
             </div>
             <div className={style.descrip}>
                 <p>{product.description}</p>
-            </div> 
+            </div>
+            <Comments data={comments} />
             </>}
         </section>
     );

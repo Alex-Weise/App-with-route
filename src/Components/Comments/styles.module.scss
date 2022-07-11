@@ -1,0 +1,93 @@
+@import "src/App.scss";
+.container {
+    width: 100%;
+};
+
+.comments {
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px 2px rgb(0 0 0 / 35%);
+    padding: 10px;
+    margin: 10px;
+    text-align: -webkit-left;
+};
+
+.onecomment {
+    display: flex;
+    align-items: stretch;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 0 10px -5px rgb(255, 92, 92);
+    font-size: 12px;
+    min-height: 40px;
+};
+
+.text p,
+.user p {
+    margin: 0 20px;
+    font-size: 18px;
+};
+
+.user p {
+    color: rgb(255, 92, 92);
+};
+
+.user {
+    border-right: 2px solid black;
+    margin-right: 10px;
+    flex: 0 0 150px;
+    width: 150px;
+    box-sizing: border-box;
+};
+
+.text {
+    flex-grow: 2;
+};
+
+@include breakpoint (sm) {
+    .container {
+        font-size: 16px;
+    };
+    .onecomment {
+        font-size: 10px;
+    };
+    .text p,
+    .user p {
+        font-size: 16px;
+        margin: 0 10px;
+    };
+    .user {
+        flex: 0 0 120px;
+        width: 120px;
+    };
+};
+
+@include breakpoint (s) {
+    .container {
+        font-size: 12px;
+    };
+    .onecomment {
+        font-size: 9px;
+        padding: 5px;
+    };
+    .text p,
+    .user p {
+        font-size: 13px;
+        margin: 0 5px;
+    };
+    .user {
+        flex: 0 0 100px;
+        width: 100px;
+        border-right: 1.5px solid black;
+    };
+};
+
+@include breakpoint (xs) {
+    .user p,
+    .text p {
+        font-size: 12px;
+    };
+    .user {
+        width: 90px;
+        flex: 0 0 90px;
+    };
+};

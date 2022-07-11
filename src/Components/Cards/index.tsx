@@ -1,5 +1,5 @@
 import React, { FC, forwardRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import style from "./styles.module.scss";
 import { motion } from "framer-motion";
 
@@ -11,9 +11,11 @@ type TCards = {
 }
 
 const Cards:FC<TCards> = forwardRef<HTMLDivElement, TCards>(({title, img, discr, id}, ref) =>  {
+  const navigate = useNavigate();
 
     return (
-        <div className={style.card} ref={ref}>
+        <div className={style.card} ref={ref}
+            onClick={ () =>  navigate(`/products/${id}`)}>
           <div className={style.image}>
             <img src={img[0]} alt={title} className={style.img}/>
           </div>
