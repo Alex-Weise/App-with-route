@@ -1,4 +1,16 @@
 @import "src/App.scss";
+
+.err {
+    display: grid;
+    gap: 10px;
+}; 
+
+.back {
+    display: flex;
+    font-size: 18px;
+    margin: 10px auto 10px 13%;
+};
+
 .cards {
     display: flex;
     flex-wrap: wrap;
@@ -10,17 +22,6 @@
     box-shadow: 0 10px 40px -20px;
     border-radius: 10px;
 };
-
-.back {
-    display: flex;
-    font-size: 18px;
-    margin: 10px auto 10px 13%;
-};
-
-.err {
-    display: grid;
-    gap: 10px;
-}; 
 
 @include breakpoint (sm) {
     .cards {

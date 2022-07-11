@@ -24,7 +24,7 @@ const CategoryCards:FC = () => {
 
     const goBack = () => navigate(-2);
 
-    if (isError) return (<h2>Произошла ошибка</h2>)
+    if (isError) return (<h2 className={style.err}>Произошла ошибка</h2>)
 
     return (<>
         <Button className={style.back} onClick={goBack} color="secondary" startIcon={<ReplyIcon />}>Назад</Button>

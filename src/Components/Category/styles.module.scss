@@ -10,7 +10,12 @@
     margin-right: auto;
     box-shadow: 0 10px 40px -20px;
     border-radius: 10px;
-}
+};
+
+.err {
+    display: grid;
+    gap: 10px;
+}; 
 
 .section {
     margin-left: auto;

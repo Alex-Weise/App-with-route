@@ -18,8 +18,7 @@ const Search:FC<TProp> = forwardRef<HTMLElement, TProp>(({value}, ref) => {
         search = form.search.value;
         navigate("/products/search", {state:search});
   };
-  const myStorage = window.location;
-  console.log(myStorage);
+
     return ( 
         <section ref={ref} className={style.search}>
         <form 

@@ -74,7 +74,7 @@ const Category = () => {
         setCountPage(page);
     }
 
-    if (isError) return (<h2>Произошла ошибка</h2>)
+    if (isError) return (<h2 className={style.err}>Произошла ошибка</h2>)
 
     return (
       <>

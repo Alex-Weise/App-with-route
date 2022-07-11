@@ -58,6 +58,7 @@ const OneCard:FC = () => {
   const [imageURL, setImageURL] = useState<string[]>([]);
   const [[page, direction], setPage] = useState([0, 0]);
   const [comments, setComments] = useState<TComments[]>([]);
+  let imageIndex = 0;
 
   useEffect( () => {
     fetch(`https://dummyjson.com/products/${id}`)
@@ -67,6 +68,7 @@ const OneCard:FC = () => {
           setProduct(data)})
       .catch(() => setIsError(true))
       .finally(() => setIsLoading(false));
+    
   }, [id])
 
   useEffect( () => {
@@ -82,7 +84,8 @@ const OneCard:FC = () => {
     setPage([page + newDirection, newDirection]);
   };
 
-  const imageIndex = wrap(0, imageURL.length, page);
+  imageIndex = wrap(0, imageURL.length, page);
+  // Здесь ошибка NAN исправить нужно как то
 
   if (isError) return (<h2 className={style.err}>
     <Button onClick={goBack} color="secondary" startIcon={<ReplyIcon />}>Назад</Button>

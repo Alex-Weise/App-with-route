@@ -5,8 +5,8 @@ import { Search } from "../Search";
 import { CircularProgress, Button } from "@mui/material";
 import ReplyIcon from '@mui/icons-material/Reply';
 import { Cards } from "../Cards";
-import style from "../Home/styles.module.scss";
 import { DEFAULT_REQUEST_LIMIT } from "../Home";
+import style from "./styles.module.scss";
 
 type TPropLoc = {
     state: string,
@@ -36,7 +36,10 @@ const SearchPage = () => {
           .catch(err => setIsError(true))
           .finally(() => setIsLoading(false));
 
-        return () => setValueSearch('');
+        return () => {
+            setIsError(false);
+            setIsSearchErr(false);
+            setValueSearch('')};
     }, [valueSearch, location, DEFAULT_URL]);
 
     useEffect ( () => {
@@ -60,6 +63,8 @@ const SearchPage = () => {
         };
 
         return () => {
+            setIsError(false);
+            setIsSearchErr(false);
             window.removeEventListener('scroll', handlerscroll);
         }
     }, [total, products, DEFAULT_URL, skip])
@@ -69,7 +74,7 @@ const SearchPage = () => {
     if (isError) return (<h2 className={style.err}>Произошла ошибка</h2>);
 
     if (isSerchErr) return (<h2 className={style.err}>
-        <Button onClick={goBack} color="secondary" startIcon={<ReplyIcon />}>Назад</Button>
+        <Button className={style.back} onClick={goBack} color="secondary" startIcon={<ReplyIcon />}>Назад</Button>
         Ничего не найдено
         </h2>);
 
@@ -77,7 +82,7 @@ const SearchPage = () => {
         <section>
              <Search value={valueSearch}/> 
              <section>
-             <Button onClick={goBack} color="secondary" startIcon={<ReplyIcon />}>Назад</Button>
+             <Button className={style.back} onClick={goBack} color="secondary" startIcon={<ReplyIcon />}>Назад</Button>
             <div className={style.cards}>
             { isLoading ? <CircularProgress /> : 
             products.map( (item) => {
