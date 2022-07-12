@@ -91,3 +91,21 @@
         flex: 0 0 90px;
     };
 };
+
+@include breakpointMin (lg) {
+    .container {
+        font-size: 20px;
+    };
+    .onecomment {
+        font-size: 16px;
+    };
+    .text p,
+    .user p {
+        font-size: 20px;
+        margin: 0 15px;
+    };
+    .user {
+        flex: 0 0 180px;
+        width: 180px;
+    };
+}

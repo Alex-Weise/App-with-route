@@ -63,7 +63,7 @@ const Header = () => {
                centered
             >
               <Tab value="category" component={Link} to="category" label="Категории" className={style.tab} />
-              <Tab value="products" component={Link} to="products" label="Все товары" className={style.tab} />
+              <Tab value={"products" || "" } component={Link} to="products" label="Все товары" className={style.tab} />
             </Tabs>
        { user ?
             <Box className={style.boxHi}>

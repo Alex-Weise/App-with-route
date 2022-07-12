@@ -7,10 +7,10 @@ type TProps = {
 };
 
 const Comments:FC<TProps> = ({data}) => {
-    // data.map(item => console.log(item));
+
     return (
         <section className={style.container}>
-            <h3 className={style.title}>Комментарии (примеры комментариев):</h3>
+            <h3>Комментарии (примеры комментариев):</h3>
             <div className={style.comments}>
                 {data.map( item => {
                     return (

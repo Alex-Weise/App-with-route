@@ -47,14 +47,19 @@ const Category = () => {
 
       load();
       return () => {
+        setImageAndCat([]);
         setCat([]);}
     }, [countPage, maxPage])
 
     useEffect( () => {
       const loadIMG = async (str:string) => {
         return await fetch(`https://dummyjson.com/products/category/${str}`)
-          .then(response => response.json())
-          .then(data => {
+          .then(response => {
+            if (!response.ok) {
+              setIsError(true);
+              throw new Error(response.status.toString())}
+            return response.json()})
+          .then(data => { 
             const arr:string[] = [str, data.products[0].images[1]];
             if (imageAndCat.find(item => item[0] === str)) return null;
             else {setImageAndCat(prev => prev.concat([arr]))}
@@ -73,7 +78,7 @@ const Category = () => {
         event.preventDefault();
         setCountPage(page);
     }
-
+    
     if (isError) return (<h2 className={style.err}>Произошла ошибка</h2>)
 
     return (
@@ -95,10 +100,10 @@ const Category = () => {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                   custom={index}>
-                    {image && <img src={image[1]} alt={image[0]} className={style.img}
+                    {image && <img src={image[1]} alt={image[0]} className={style.img} loading="eager"
                         style={{border: `1.5px solid ${colors[index]}`}} />}
                     <div style={{borderBottom: `1.5px solid ${colors[index]}`, padding: '5px', borderRadius: '8px'}}>
-                      <Link to={`/category/${item}`} className={style.link}>
+                      <Link to={`/category/${item}`} className={image ? style.link : style.img}>
                         {cat}
                       </Link>
                     </div>

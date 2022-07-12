@@ -1,0 +1,236 @@
+@import "src/App.scss";
+
+.container {
+    width: 100%;
+};
+
+.text_area {
+    display: flex;
+    margin: 10px;
+    padding: 10px 5px 15px 10px;
+    position: relative;
+    text-align: -webkit-left;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px 2px rgb(0 0 0 / 35%);
+    font-size: 14px;
+};
+
+.user {
+    margin-right: 10px;
+    flex: 0 0 150px;
+    width: 150px;
+    box-sizing: border-box;
+};
+
+.user p {
+    margin: 20px 0;
+    font-size: 18px;
+    color: rgb(255, 92, 92);
+};
+
+.text_area textarea {
+    margin: 10px;
+    font-size: 18px;
+    border-radius: 2px;
+    box-shadow: 0 0 15px -5px rgb(255, 92, 92);
+    width: 95%;
+};
+
+.text {
+    position: relative;
+};
+
+.reset {
+    position: absolute;
+    bottom: -10px;
+    right: 120px;
+    cursor: pointer;
+    background-color: transparent;
+    transition: transform 0.1s;
+    border: none;
+    box-shadow: 1px 1px 10px -3px red;
+    font-size: 14px;
+    &:hover {
+        transform: scale(1.1);
+    };
+    &:active {
+        transform: scale(0.9);
+    };
+};
+
+.add {
+    color: green;
+    position: absolute;
+    bottom: -10px;
+    right: 15px;
+    cursor: pointer;
+    background-color: transparent;
+    transition: transform 0.1s;
+    border: none;
+    box-shadow: 2px 1px 10px -3px green;
+    font-size: 14px;
+    &:hover {
+        transform: scale(1.1);
+    };
+    &:active {
+        transform: scale(0.9);
+    };
+};
+
+.emoji {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    box-shadow: 0 0 10px -5px;
+    border-radius: 10px;
+    box-sizing: content-box;
+    padding: 5px;
+    margin: 25px 10px 10px 10px;
+    width: 30%;
+};
+
+.emoji li {
+    margin: 2px 2%;
+    cursor: pointer;
+    transition: transform 0.2s;
+    font-size: 20px;
+    &:hover {
+        transform: scale(1.3);
+    };
+    &:active {
+        transform: scale(0.8);
+    };
+};
+
+@include breakpoint (md) {
+    .text_area {
+        font-size: 12px;
+    };
+    .text_area textarea  {
+        font-size: 18px;
+        height: 120px;
+    };
+    .user {
+        flex: 0 0 120px;
+        width: 120px;
+    };
+    .user p {
+        margin: 10px 0;
+        font-size: 18px;
+    };
+    .emoji {
+        padding: 2px;
+        margin: 20px 5px 10px 5px;
+    };
+    .emoji li {
+        font-size: 18px;
+    };
+    .add {
+        font-size: 14px;
+        right: 30px;
+    };
+    .reset {
+        font-size: 14px;
+        right: 140px;
+    };
+};
+
+@include breakpoint (sm) {
+    .text_area {
+        font-size: 12px;
+    };
+    .text_area textarea  {
+        font-size: 16px;
+        width: 95%;
+        height: 100px;
+    };
+    .user {
+        flex: 0 0 100px;
+        width: 100px;
+    };
+    .user p {
+        margin: 10px 0;
+        font-size: 16px;
+    };
+    .emoji {
+        padding: 2px;
+        margin: 20px 5px 10px 5px;
+    };
+    .emoji li {
+        font-size: 14px;
+    };
+    .add {
+        font-size: 12px;
+        right: 20px;
+    };
+    .reset {
+        font-size: 12px;
+        right: 110px;
+    };
+};
+
+@include breakpoint (s) {
+    .container {
+        font-size: 14px;
+    };
+    .emoji {
+        display: none;
+    };
+};
+
+@include breakpoint (xs) {
+    .container {
+        font-size: 12px;
+    }
+    .text_area {
+        font-size: 9px;
+    };
+    .text_area textarea  {
+        font-size: 12px;
+        height: 60px;
+    };
+    .user {
+        flex: 0 0 70px;
+        width: 70px;
+    };
+    .user p {
+        margin: 5px 0;
+        font-size: 12px;
+    };
+    .add {
+        font-size: 12px;
+    };
+    .reset {
+        font-size: 12px;
+    };
+};
+
+@include breakpointMin (lg) {
+    .container {
+        font-size: 20px;
+    };
+    .text_area {
+        font-size: 16px;
+        padding: 10px 10px 25px 10px;
+    };
+    .text_area textarea  {
+        font-size: 20px;
+        height: 180px;
+    };
+    .user {
+        flex: 0 0 180px;
+        width: 180px;
+    };
+    .reset {
+        font-size: 18px;
+        right: 150px;
+        bottom: -15px;
+    };
+    .add {
+        font-size: 18px;
+        bottom: -16px;
+    };
+    .emoji li {
+        font-size: 24px;
+    };
+};

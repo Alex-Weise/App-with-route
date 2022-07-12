@@ -8,6 +8,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import style from "../OneCard/styles.module.scss";
 import { Comments } from "../Comments";
+import { NewComment } from "../Comments/New comment";
 
 const StyledRating = styled(Rating)({
     '& .MuiRating-iconFilled': {
@@ -58,16 +59,23 @@ const OneCard:FC = () => {
   const [imageURL, setImageURL] = useState<string[]>([]);
   const [[page, direction], setPage] = useState([0, 0]);
   const [comments, setComments] = useState<TComments[]>([]);
-  let imageIndex = 0;
 
   useEffect( () => {
-    fetch(`https://dummyjson.com/products/${id}`)
-      .then(response => response.json())
+    const load = async() => {
+     return await fetch(`https://dummyjson.com/products/${id}`)
+      .then(response => {
+        if (!response.ok) {
+          setIsError(true);
+          throw new Error(response.status.toString())}
+        return response.json()})
       .then(data => {
           setImageURL(data.images);
           setProduct(data)})
       .catch(() => setIsError(true))
       .finally(() => setIsLoading(false));
+    };
+
+    load();
     
   }, [id])
 
@@ -84,8 +92,7 @@ const OneCard:FC = () => {
     setPage([page + newDirection, newDirection]);
   };
 
-  imageIndex = wrap(0, imageURL.length, page);
-  // Здесь ошибка NAN исправить нужно как то
+ const imageIndex = wrap(0, imageURL.length, page);
 
   if (isError) return (<h2 className={style.err}>
     <Button onClick={goBack} color="secondary" startIcon={<ReplyIcon />}>Назад</Button>
@@ -107,7 +114,7 @@ const OneCard:FC = () => {
                       className={style.img}
                       key={page}
                       alt={product.title}
-                      src={product.images[imageIndex]}
+                      src={ isNaN(imageIndex) ? product.images[0] : product.images[imageIndex]}
                       custom={direction}
                       variants={variants}
                       initial="enter"
@@ -160,6 +167,7 @@ const OneCard:FC = () => {
             <div className={style.descrip}>
                 <p>{product.description}</p>
             </div>
+            <NewComment />
             <Comments data={comments} />
             </>}
         </section>
