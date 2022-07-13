@@ -167,7 +167,7 @@ const OneCard:FC = () => {
             <div className={style.descrip}>
                 <p>{product.description}</p>
             </div>
-            <NewComment />
+            <NewComment setComment={setComments} />
             <Comments data={comments} />
             </>}
         </section>

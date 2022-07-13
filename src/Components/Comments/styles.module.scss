@@ -9,6 +9,8 @@
     padding: 10px;
     margin: 10px;
     text-align: -webkit-left;
+    display: flex;
+    flex-direction: column-reverse;
 };
 
 .onecomment {

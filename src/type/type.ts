@@ -11,11 +11,11 @@ export type TContent = {
 };
 
 export type TComments = {
-    id: number,
+    id?: number | string,
     body: string,
     postId: number,
     user: {
-        id: number,
+        id?: number,
         username: string,
     },
 };

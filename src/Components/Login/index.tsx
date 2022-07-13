@@ -27,7 +27,7 @@ const Login:FC<TProp>  = ({close, from}) => {
         const user = form.username.value;
         signin(user, () => { navigate(fromPage, {replace: true})});
         close();
-    }
+    };
 
     return (
         <section className={style.form}>
