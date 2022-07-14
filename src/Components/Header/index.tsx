@@ -10,7 +10,7 @@ import cx from 'classnames';
 import IMg from '../../assets/img.jpg';
 import { motion } from "framer-motion";
 
-const logoVariants = {
+const Variants = {
   spring: {
     rotate: -25,
     transition: {
@@ -22,12 +22,18 @@ const logoVariants = {
       mass: 25,
     },
   },
+  click: {
+    backgroundColor: "#e1bee7",
+    transition: {
+      ease: "linear",
+    }
+  }
 };
 
 const Header = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const [activeLink, setActive] = useState(true);
+    const [activeLink, setActive] = useState(false);
     const { user, signout } = useAuth();
     const [isOpen, setIsOpen] = useState(false);
     const handleOpen = () => setIsOpen(true);
@@ -41,7 +47,7 @@ const Header = () => {
         <header style={{position: "relative"}}>
           <div>
             <motion.img src={IMg} alt="LOGO" className={style.img}
-              animate={logoVariants.spring}
+              animate={Variants.spring}
              />
           </div>
           <motion.div className={style.tabs}>
@@ -49,6 +55,7 @@ const Header = () => {
                 style={{display: "contents", position: "relative"}}
                 initial={{color: "#757575"}}
                 animate={{color: activeLink ? "#ba68c8" : "#757575"}}
+                whileTap={Variants.click}
               >
                 <Link to="/category" className={style.tab} onClick={() => setActive(true)}>Категории {activeLink && <ActiveLine />}</Link>
               </motion.div>
@@ -56,6 +63,7 @@ const Header = () => {
                 style={{display: "contents", position: "relative"}}
                 initial={{color: "#757575"}}
                 animate={{color: activeLink ? "#757575" : "#ba68c8"}}
+                whileTap={Variants.click}
                 >
                   <Link to="/products" className={style.tab} onClick={() => setActive(false)}>Все товары {!activeLink && <ActiveLine />}</Link>
                 </motion.div>
