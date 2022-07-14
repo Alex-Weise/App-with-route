@@ -4,6 +4,8 @@
     text-align: center;
     padding-top: 30px;
     min-height: auto;
+    display: flex;
+    justify-content: center;
 }
 
 .tab {
@@ -11,7 +13,9 @@
     padding: 0;
     margin-left: 3%;
     margin-right: 3%;
-    text-transform: none;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
 }
 
 .user {

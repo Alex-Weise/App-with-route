@@ -29,9 +29,10 @@ const SearchPage = () => {
         valueSearch && fetch(DEFAULT_URL)
           .then(response => response.json())
           .then(data => {
-            if(data.products.length === 0) setIsSearchErr(true);
+            if(data.products.length === 0) return setIsSearchErr(true);
             setTotal(data.total);
             setProducts(data.products);
+            setIsSearchErr(false);
           })
           .catch(err => setIsError(true))
           .finally(() => setIsLoading(false));
@@ -40,7 +41,7 @@ const SearchPage = () => {
             setIsError(false);
             setIsSearchErr(false);
             setValueSearch('')};
-    }, [valueSearch, location, DEFAULT_URL]);
+    }, [valueSearch, location.state, DEFAULT_URL]);
 
     useEffect ( () => {
         const concatURL = DEFAULT_URL + `&skip=${skip}`;
@@ -63,19 +64,19 @@ const SearchPage = () => {
         };
 
         return () => {
-            setIsError(false);
-            setIsSearchErr(false);
             window.removeEventListener('scroll', handlerscroll);
         }
     }, [total, products, DEFAULT_URL, skip])
-
+    
     const goBack = () => navigate(-1);
 
     if (isError) return (<h2 className={style.err}>Произошла ошибка</h2>);
 
-    if (isSerchErr) return (<h2 className={style.err}>
-        <Button className={style.back} onClick={goBack} color="secondary" startIcon={<ReplyIcon />}>Назад</Button>
-        Ничего не найдено
+    if (isSerchErr) return (
+        <h2 className={style.err}>
+            <Search value={valueSearch}/> 
+            <Button className={style.back} onClick={goBack} color="secondary" startIcon={<ReplyIcon />}>Назад</Button>
+            Ничего не найдено
         </h2>);
 
     return (

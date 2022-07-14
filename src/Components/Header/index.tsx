@@ -1,7 +1,7 @@
 import { useAuth } from "../../hook/useAuth";
 import { useNavigate, useLocation, Link } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { Tabs, Tab, Box, Modal, Button } from "@mui/material";
+import { useState } from "react";
+import { Box, Modal, Button } from "@mui/material";
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
 import style from "./styles.module.scss";
@@ -27,20 +27,11 @@ const logoVariants = {
 const Header = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const [tabValue, setTabValue] = useState("products");
+    const [activeLink, setActive] = useState(true);
     const { user, signout } = useAuth();
     const [isOpen, setIsOpen] = useState(false);
     const handleOpen = () => setIsOpen(true);
     const handleClose = () => setIsOpen(false);
-
-    useEffect ( () => {
-        setTabValue(location.pathname.slice(1,9));
-        return () => setTabValue("products");
-    }, [user, location])
-
-    const handleTabChange = (event: React.SyntheticEvent, newValue: string) => {
-      setTabValue(newValue);
-    };
 
     const handleOutClick = () => {
       signout( () => navigate("/products", {replace: true}))
@@ -53,18 +44,22 @@ const Header = () => {
               animate={logoVariants.spring}
              />
           </div>
-            <Tabs 
-               className={style.tabs}
-               value={tabValue}
-               onChange={handleTabChange}
-               textColor="secondary"
-               indicatorColor="secondary"
-               aria-label="secondary tabs example"
-               centered
-            >
-              <Tab value="category" component={Link} to="category" label="Категории" className={style.tab} />
-              <Tab value={"products"} component={Link} to="products" label="Все товары" className={style.tab} />
-            </Tabs>
+          <motion.div className={style.tabs}>
+              <motion.div
+                style={{display: "contents", position: "relative"}}
+                initial={{color: "#757575"}}
+                animate={{color: activeLink ? "#ba68c8" : "#757575"}}
+              >
+                <Link to="/category" className={style.tab} onClick={() => setActive(true)}>Категории {activeLink && <ActiveLine />}</Link>
+              </motion.div>
+              <motion.div
+                style={{display: "contents", position: "relative"}}
+                initial={{color: "#757575"}}
+                animate={{color: activeLink ? "#757575" : "#ba68c8"}}
+                >
+                  <Link to="/products" className={style.tab} onClick={() => setActive(false)}>Все товары {!activeLink && <ActiveLine />}</Link>
+                </motion.div>
+          </motion.div>
             {user ?
               <Box className={style.boxHi}>
                 <p className={style.user}>{user}</p>
@@ -93,3 +88,17 @@ const Header = () => {
     )
 };
 export {Header};
+
+function ActiveLine () {
+  return (
+    <motion.div
+      layoutId="underline"
+      style={{
+        width: "100%",
+        height: "2px",
+        position: "absolute",
+        bottom: "-4px",
+        backgroundColor: "#ba68c8",
+      }}/>
+  )
+};

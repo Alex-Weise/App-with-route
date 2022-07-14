@@ -22,7 +22,7 @@ const CategoryCards:FC = () => {
           .finally(() => setIsLoading(false)) 
     }, [title])
 
-    const goBack = () => navigate(-2);
+    const goBack = () => navigate(-1);
 
     if (isError) return (<h2 className={style.err}>Произошла ошибка</h2>)
 
