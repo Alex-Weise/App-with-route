@@ -33,6 +33,11 @@ const NewComment:FC<TProps> = ({setComment}) => {
         setValue('');
     };
 
+    const handleClickAuth = () => {
+        const auth = document.getElementById("auth");
+        auth?.click();
+    };
+
     return ( 
         <div className={style.container}>
             <h3>Оставить комментарий</h3>
@@ -68,7 +73,7 @@ const NewComment:FC<TProps> = ({setComment}) => {
                     <li>👎</li>
                 </ul>
             </div> :
-            <div className={style.notauth}> Чтобы оставить комментарий нужно Авторизоваться </div>
+            <div className={style.notauth}> Чтобы оставить комментарий нужно <button className={style.auth} onClick={handleClickAuth}>Авторизоваться</button></div>
             }
         </div>
     )

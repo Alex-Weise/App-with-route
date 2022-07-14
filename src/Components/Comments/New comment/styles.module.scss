@@ -4,6 +4,20 @@
     color: green;
 };
 
+.auth {
+    border: none;
+    cursor: pointer;
+    background: transparent;
+    color: #ff8a80;
+    font-size: inherit;
+    &:hover {
+        transform: scale(1.1);
+    };
+    &:active {
+        transform: scale(0.9);
+    };
+};
+
 .container {
     width: 100%;
 };

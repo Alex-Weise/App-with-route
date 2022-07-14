@@ -61,18 +61,31 @@ const OneCard:FC = () => {
   const [comments, setComments] = useState<TComments[]>([]);
 
   useEffect( () => {
+    // const load = async() => {
+    //  return await fetch(`https://dummyjson.com/products/${id}`)
+    //   .then(response => {
+    //     if (!response.ok) {
+    //       setIsError(true);
+    //       throw new Error(response.status.toString())}
+    //     return response.json()})
+    //   .then(data => {
+    //       setImageURL(data.images);
+    //       setProduct(data)})
+    //   .catch(() => setIsError(true))
+    //   .finally(() => setIsLoading(false));
+    // };
     const load = async() => {
-     return await fetch(`https://dummyjson.com/products/${id}`)
-      .then(response => {
-        if (!response.ok) {
-          setIsError(true);
-          throw new Error(response.status.toString())}
-        return response.json()})
-      .then(data => {
-          setImageURL(data.images);
-          setProduct(data)})
-      .catch(() => setIsError(true))
-      .finally(() => setIsLoading(false));
+      try {
+        let res = await fetch(`https://dummyjson.com/products/${id}`);
+        if (!res.ok) {
+              setIsError(true);
+              throw new Error(res.status.toString());};
+        let data = await res.json();
+        setImageURL(data.images);
+        setProduct(data);
+      } catch (err) { 
+        setIsError(true)
+      } finally {setIsLoading(false)};
     };
 
     load();
@@ -114,7 +127,7 @@ const OneCard:FC = () => {
                       className={style.img}
                       key={page}
                       alt={product.title}
-                      src={ isNaN(imageIndex) ? product.images[0] : product.images[imageIndex]}
+                      src={ isNaN(imageIndex) ? product.images?.[0] : product.images?.[imageIndex]}
                       custom={direction}
                       variants={variants}
                       initial="enter"
@@ -175,8 +188,3 @@ const OneCard:FC = () => {
 }
 
 export {OneCard};
-
-// { product.images.map( (item, index) => {
-//   return (<button type="button" key={item}
-//    onClick={ () => setImageURL(item) }>{index + 1}</button>)})
-// }

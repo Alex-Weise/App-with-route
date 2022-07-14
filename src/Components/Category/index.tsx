@@ -31,18 +31,34 @@ const Category = () => {
     const [imageAndCat, setImageAndCat] = useState<string[][]>([]);
 
     useEffect( () => {
+      // const load = async () => {
+      //    await fetch('https://dummyjson.com/products/categories')
+      //     .then(response => response.json())
+      //     .then(data => {
+      //       setMaxPage(Math.ceil(data.length / DEFAULT_LIMIT_CAT));
+      //       for (let i = 1; i <= maxPage; i++ ) {
+      //         if (i === countPage && i === 1) setCat(data.slice(0, DEFAULT_LIMIT_CAT))
+      //         else if (i === countPage) setCat(data.slice(DEFAULT_LIMIT_CAT * (i - 1), DEFAULT_LIMIT_CAT * i));
+      //       }
+      //     })
+      //     .catch(() => setIsError(true))
+      //     .finally(() => setIsLoading(false));
+      // };
       const load = async () => {
-         await fetch('https://dummyjson.com/products/categories')
-          .then(response => response.json())
-          .then(data => {
-            setMaxPage(Math.ceil(data.length / DEFAULT_LIMIT_CAT));
-            for (let i = 1; i <= maxPage; i++ ) {
-              if (i === countPage && i === 1) setCat(data.slice(0, DEFAULT_LIMIT_CAT))
-              else if (i === countPage) setCat(data.slice(DEFAULT_LIMIT_CAT * (i - 1), DEFAULT_LIMIT_CAT * i));
+        try {
+          let res = await fetch('https://dummyjson.com/products/categories');
+          if (!res.ok) {
+            setIsError(true);
+            throw new Error(res.status.toString())};
+          let data = await res.json();
+          setMaxPage(Math.ceil(data.length / DEFAULT_LIMIT_CAT));
+          for (let i = 1; i <= maxPage; i++ ) {
+              if (i === countPage && i === 1) await setCat(data.slice(0, DEFAULT_LIMIT_CAT))
+              else if (i === countPage) await setCat(data.slice(DEFAULT_LIMIT_CAT * (i - 1), DEFAULT_LIMIT_CAT * i));
             }
-          })
-          .catch(() => setIsError(true))
-          .finally(() => setIsLoading(false));
+        } catch  (err) {
+          setIsError(true)
+        } finally {setIsLoading(false)};
       };
 
       load();
@@ -52,18 +68,33 @@ const Category = () => {
     }, [countPage, maxPage])
 
     useEffect( () => {
+      // const loadIMG = async (str:string) => {
+      //   return await fetch(`https://dummyjson.com/products/category/${str}`)
+      //     .then(response => {
+      //       if (!response.ok) {
+      //         setIsError(true);
+      //         throw new Error(response.status.toString())}
+      //       return response.json()})
+      //     .then(data => { 
+      //       const arr:string[] = [str, data.products[0].images[1]];
+      //       if (imageAndCat.find(item => item[0] === str)) return null;
+      //       else {setImageAndCat(prev => prev.concat([arr]))}
+      //     })
+      // };
       const loadIMG = async (str:string) => {
-        return await fetch(`https://dummyjson.com/products/category/${str}`)
-          .then(response => {
-            if (!response.ok) {
+        try {
+          let res = await fetch(`https://dummyjson.com/products/category/${str}`);
+          if (!res.ok) {
               setIsError(true);
-              throw new Error(response.status.toString())}
-            return response.json()})
-          .then(data => { 
-            const arr:string[] = [str, data.products[0].images[1]];
-            if (imageAndCat.find(item => item[0] === str)) return null;
-            else {setImageAndCat(prev => prev.concat([arr]))}
-          })
+              throw new Error(res.status.toString());};
+          let data = await res.json();
+          let arr:string[] = [str, data.products[0].images[1]];
+          if (imageAndCat.find(item => item[0] === str)) return null;
+          else {setImageAndCat(prev => prev.concat([arr]))}
+        } catch (err) {
+          setIsError(true);
+        };
+
       };
 
       category.forEach( (item:string) => {
@@ -77,7 +108,7 @@ const Category = () => {
     const handlePageChange = (event:React.ChangeEvent<unknown>, page:number) => {
         event.preventDefault();
         setCountPage(page);
-    }
+    };
     
     if (isError) return (<h2 className={style.err}>Произошла ошибка</h2>)
 
@@ -100,8 +131,8 @@ const Category = () => {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                   custom={index}>
-                    {image && <img src={image[1]} alt={image[0]} className={style.img} loading="eager"
-                        style={{border: `1.5px solid ${colors[index]}`}} />}
+                    <img src={image?.[1]} alt={image?.[0]} className={style.img} loading="eager"
+                        style={{border: `1.5px solid ${colors[index]}`}} />
                     <div style={{borderBottom: `1.5px solid ${colors[index]}`, padding: '5px', borderRadius: '8px'}}>
                       <Link to={`/category/${item}`} className={image ? style.link : style.img}>
                         {cat}

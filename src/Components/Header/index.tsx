@@ -63,21 +63,22 @@ const Header = () => {
                centered
             >
               <Tab value="category" component={Link} to="category" label="Категории" className={style.tab} />
-              <Tab value={"products" || "" } component={Link} to="products" label="Все товары" className={style.tab} />
+              <Tab value={"products"} component={Link} to="products" label="Все товары" className={style.tab} />
             </Tabs>
-       { user ?
-            <Box className={style.boxHi}>
-              <p className={style.user}>{user}</p>
-              <Button className={style.visible} variant="outlined" color="error" onClick={handleOutClick}>Выйти</Button>
-              <Button className={ cx(style.hidden, style.logo)} variant="outlined" color="error" onClick={handleOutClick}
-              startIcon={<LogoutIcon />}></Button>  
-            </Box> :
-            <section >
-            <Button classes={{root: cx(style.visible, style.logo)}} variant="outlined" color="secondary" onClick={handleOpen} 
-            >Авторизация</Button>
-            <Button className={ cx(style.hidden, style.logo)} variant="outlined" color="secondary" onClick={handleOpen} 
-             startIcon={<LoginIcon />}></Button>
-            </section>}
+            {user ?
+              <Box className={style.boxHi}>
+                <p className={style.user}>{user}</p>
+                <Button className={style.visible} variant="outlined" color="error" onClick={handleOutClick}>Выйти</Button>
+                <Button className={ cx(style.hidden, style.logo)} variant="outlined" color="error" onClick={handleOutClick}
+                startIcon={<LogoutIcon />}></Button>  
+              </Box> :
+              <section >
+              <Button classes={{root: cx(style.visible, style.logo)}} id="auth" variant="outlined" color="secondary" onClick={handleOpen} 
+              >Авторизация</Button>
+              <Button className={ cx(style.hidden, style.logo)} id="auth2" variant="outlined" color="secondary" onClick={handleOpen} 
+              startIcon={<LoginIcon />}></Button>
+              </section>
+            }
             <Modal
                open={isOpen}
                onClose={handleClose}
