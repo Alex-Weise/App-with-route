@@ -52,25 +52,25 @@ const NewComment:FC<TProps> = ({setComment}) => {
                     <button type="button" onClick={handleClickAdd} 
                         className={style.add}>Отправить 🗸</button>
                 </div>
-                <ul className={style.emoji} onClick={handleClickEmoji}>
-                    <li>🙂</li>
-                    <li>😁</li>
-                    <li>🤣</li>
-                    <li>🙃</li>
-                    <li>😊</li>
-                    <li>😍</li>
-                    <li>😐</li>
-                    <li>😡</li>
-                    <li>😎</li>
-                    <li>🙁</li>
-                    <li>😩</li>
-                    <li>😱</li>
-                    <li>😢</li>
-                    <li>💩</li>
-                    <li>💣</li>
-                    <li>💯</li>
-                    <li>👍</li>
-                    <li>👎</li>
+                <ul className={style.emoji}>
+                    <li onClick={handleClickEmoji}>🙂</li>
+                    <li onClick={handleClickEmoji}>😁</li>
+                    <li onClick={handleClickEmoji}>🤣</li>
+                    <li onClick={handleClickEmoji}>🙃</li>
+                    <li onClick={handleClickEmoji}>😊</li>
+                    <li onClick={handleClickEmoji}>😍</li>
+                    <li onClick={handleClickEmoji}>😐</li>
+                    <li onClick={handleClickEmoji}>😡</li>
+                    <li onClick={handleClickEmoji}>😎</li>
+                    <li onClick={handleClickEmoji}>🙁</li>
+                    <li onClick={handleClickEmoji}>😩</li>
+                    <li onClick={handleClickEmoji}>😱</li>
+                    <li onClick={handleClickEmoji}>😢</li>
+                    <li onClick={handleClickEmoji}>💩</li>
+                    <li onClick={handleClickEmoji}>💣</li>
+                    <li onClick={handleClickEmoji}>💯</li>
+                    <li onClick={handleClickEmoji}>👍</li>
+                    <li onClick={handleClickEmoji}>👎</li>
                 </ul>
             </div> :
             <div className={style.notauth}> Чтобы оставить комментарий нужно <button className={style.auth} onClick={handleClickAuth}>Авторизоваться</button></div>

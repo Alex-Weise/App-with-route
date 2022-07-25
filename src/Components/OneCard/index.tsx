@@ -100,7 +100,6 @@ const OneCard:FC = () => {
       .finally(() => setIsLoading(false));
   }, [id])
 
-  const goBack = () => navigate(-1);
   const paginate = (newDirection: number) => {
     setPage([page + newDirection, newDirection]);
   };
@@ -108,7 +107,7 @@ const OneCard:FC = () => {
  const imageIndex = wrap(0, imageURL.length, page);
 
   if (isError) return (<h2 className={style.err}>
-    <Button onClick={goBack} color="secondary" startIcon={<ReplyIcon />}>Назад</Button>
+    <Button onClick={() => navigate(-1)} color="secondary" startIcon={<ReplyIcon />}>Назад</Button>
     Произошла ошибка
     </h2>);
     
@@ -116,7 +115,7 @@ const OneCard:FC = () => {
         <section className={style.one_card}>
           {isLoading ? <CircularProgress /> : 
             product && <>
-            <Button className={style.back} onClick={goBack} color="secondary" startIcon={<ReplyIcon />}>Назад</Button>
+            <Button className={style.back} onClick={() => navigate(-1)} color="secondary" startIcon={<ReplyIcon />}>Назад</Button>
             <div className={style.title}>
                 {product.title}
                 <p>Цена <b className={style.price}>{product.price}$</b></p>

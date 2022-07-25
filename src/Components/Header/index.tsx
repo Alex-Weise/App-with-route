@@ -33,7 +33,7 @@ const Variants = {
 const Header = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const [activeLink, setActive] = useState(false);
+    const [activeLink, setActive] = useState<string>(location.pathname.slice(1,9));
     const { user, signout } = useAuth();
     const [isOpen, setIsOpen] = useState(false);
     const handleOpen = () => setIsOpen(true);
@@ -54,18 +54,18 @@ const Header = () => {
               <motion.div
                 style={{display: "contents", position: "relative"}}
                 initial={{color: "#757575"}}
-                animate={{color: activeLink ? "#ba68c8" : "#757575"}}
+                animate={{color: (activeLink === "category") ? "#ba68c8" : "#757575"}}
                 whileTap={Variants.click}
               >
-                <Link to="/category" className={style.tab} onClick={() => setActive(true)}>Категории {activeLink && <ActiveLine />}</Link>
+                <Link to="/category" className={style.tab} onClick={() => setActive("category")}>Категории {(activeLink === "category") && <ActiveLine />}</Link>
               </motion.div>
               <motion.div
                 style={{display: "contents", position: "relative"}}
                 initial={{color: "#757575"}}
-                animate={{color: activeLink ? "#757575" : "#ba68c8"}}
+                animate={{color: (activeLink === "products") ? "#ba68c8" : "#757575"}}
                 whileTap={Variants.click}
                 >
-                  <Link to="/products" className={style.tab} onClick={() => setActive(false)}>Все товары {!activeLink && <ActiveLine />}</Link>
+                  <Link to="/products" className={style.tab} onClick={() => setActive("products")}>Все товары {(activeLink === "products") && <ActiveLine />}</Link>
                 </motion.div>
           </motion.div>
             {user ?

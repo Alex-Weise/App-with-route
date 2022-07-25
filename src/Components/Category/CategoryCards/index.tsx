@@ -22,12 +22,10 @@ const CategoryCards:FC = () => {
           .finally(() => setIsLoading(false)) 
     }, [title])
 
-    const goBack = () => navigate(-1);
-
     if (isError) return (<h2 className={style.err}>Произошла ошибка</h2>)
 
     return (<>
-        <Button className={style.back} onClick={goBack} color="secondary" startIcon={<ReplyIcon />}>Назад</Button>
+        <Button className={style.back} onClick={() => navigate(-1)} color="secondary" startIcon={<ReplyIcon />}>Назад</Button>
         <section className={style.cards}>
             {isLoading ? <CircularProgress /> : 
             categories.map( (item) => {

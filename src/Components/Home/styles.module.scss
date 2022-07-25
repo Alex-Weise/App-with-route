@@ -17,12 +17,12 @@
     gap: 10px;
 };
 
-.open {
+.scrollto {
     background: #f2d9f66c;
     border: 1px solid #f2d9f638;
     border-radius: 50%;
     font-size: 30px;
-    position: absolute;
+    position: fixed;
     top: 15px;
     right: 4%;
     cursor: pointer;
@@ -34,9 +34,9 @@
 };
 
 @include breakpoint (sm) {
-    .open {
-        top: 5px;
-        right: 3%;
+    .scrollto {
+        right: 1%;
+        font-size: 22px;
     };
     .search {
         height: 50px;
@@ -47,16 +47,18 @@
 };
 
 @include breakpoint (s) {
-    .open {
-        display: none;
+    .scrollto {
+        right: 0px;
+        font-size: 16px;
     };
     .cards {
+        margin-right: 40px;
         width: 95%;
     };
 };
 
 @include breakpointMin (lg) {
-    .open {
+    .scrollto {
         font-size: 36px;
     };
 }

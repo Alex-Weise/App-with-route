@@ -1,4 +1,4 @@
-import { CircularProgress, Stack, Pagination } from "@mui/material";
+import { Stack, Pagination, Skeleton } from "@mui/material";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -53,8 +53,8 @@ const Category = () => {
           let data = await res.json();
           setMaxPage(Math.ceil(data.length / DEFAULT_LIMIT_CAT));
           for (let i = 1; i <= maxPage; i++ ) {
-              if (i === countPage && i === 1) await setCat(data.slice(0, DEFAULT_LIMIT_CAT))
-              else if (i === countPage) await setCat(data.slice(DEFAULT_LIMIT_CAT * (i - 1), DEFAULT_LIMIT_CAT * i));
+              if (i === countPage && i === 1) setCat(data.slice(0, DEFAULT_LIMIT_CAT))
+              else if (i === countPage) setCat(data.slice(DEFAULT_LIMIT_CAT * (i - 1), DEFAULT_LIMIT_CAT * i));
             }
         } catch  (err) {
           setIsError(true)
@@ -118,12 +118,15 @@ const Category = () => {
             <Pagination count={maxPage} color="secondary" classes={{root: style.section}} onChange={handlePageChange} />
         </Stack>
         <section className={style.category}>
-            { isLoading ? <CircularProgress /> : 
+            { isLoading ? 
+            <div className={style.text}>
+              <Skeleton variant="circular" className={style.img} />
+              <Skeleton variant="text" className={style.link} />
+            </div> : 
              category.map( (item, index) => {
                 let cat = item.slice(0,1).toUpperCase() + item.slice(1);
                 let image = imageAndCat.find(i => i[0] === item);
-                return (
-                <motion.div key={index} className={style.text}
+                return (<motion.div key={index} className={style.text}
                   onClick={ () => navigate(`/category/${item}`)}
                   variants={variantMotion}
                   initial='hidden'
@@ -131,7 +134,7 @@ const Category = () => {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                   custom={index}>
-                    <img src={image?.[1]} alt={image?.[0]} className={style.img} loading="eager"
+                    <img src={image?.[1]} alt={item} className={style.img} loading="eager"
                         style={{border: `1.5px solid ${colors[index]}`}} />
                     <div style={{borderBottom: `1.5px solid ${colors[index]}`, padding: '5px', borderRadius: '8px'}}>
                       <Link to={`/category/${item}`} className={image ? style.link : style.img}>

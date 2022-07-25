@@ -4,45 +4,20 @@ import SearchIcon from '@mui/icons-material/Search';
 import { MCards } from "../Cards";
 import { CircularProgress } from "@mui/material";
 import style from "./styles.module.scss";
-import { MSearch } from "../Search";
+import { Search } from "../Search";
 import { motion } from "framer-motion";  
 
 
 export const DEFAULT_REQUEST_LIMIT = 15;
 
-const searchVariants = {
-    hidden: {
-        clipPath: "circle(20px at 105% 50%)",
-        transition: {
-          duration: 1,
-          type: "spring",
-          stiffness: 200,
-          damping: 40,
-          bounce: 0.5,
-        },
-    },
-    visible: {
-        clipPath: "circle(2200px at 100% 100%)",
-        transition: {
-            duration: 1,
-            type: "spring",
-            stiffness: 100,
-            damping: 40,
-            bounce: 0.5,
-        },
-    },
-};
-
 const Home = () => {
     const [products, setProducts] = useState<TContent[]>([]);
-    const [isVisible, setIsVisible] = useState(true);
+    const [isVisible, setIsVisible] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const [isError, setIsError] = useState(false);
     const [skip, setSkip] = useState(DEFAULT_REQUEST_LIMIT);
     const [total, setTotal] = useState(0);
     const DEFAULT_URL = `https://dummyjson.com/products?limit=${DEFAULT_REQUEST_LIMIT}`;
-
-    const handleVisibility = () => {setIsVisible(!isVisible)};
 
     useEffect ( () => {
         fetch(DEFAULT_URL)
@@ -57,6 +32,7 @@ const Home = () => {
         return () => {
             setProducts([]);
             setSkip(DEFAULT_REQUEST_LIMIT);
+            setIsVisible(false);
         }
     }, [DEFAULT_URL])
 
@@ -71,10 +47,11 @@ const Home = () => {
         const handlerscroll = () => {
             const scrollable = document.documentElement.scrollHeight - window.innerHeight;
             const scrolled = Math.ceil(window.scrollY);
-             if (scrolled === scrollable) {
+            scrolled > 200 ? setIsVisible(true) : setIsVisible(false);
+            if (scrolled === scrollable) {
                 setSkip(skip + DEFAULT_REQUEST_LIMIT);
                 upload();
-            }
+            };
         };
         if (total > DEFAULT_REQUEST_LIMIT && !(skip >= total)) {
             window.addEventListener('scroll', handlerscroll)
@@ -92,15 +69,14 @@ const Home = () => {
           style={{position: 'relative'}}
         >
             <div className={style.search}>
-                <MSearch 
-                    initial={false}
-                    animate={isVisible ? "visible" : "hidden"}
-                    variants={searchVariants}
-                />
+                <Search />
                 <motion.button
+                initial={{opacity: 0}}
+                animate={{opacity: isVisible ? 1 : 0}}
                 whileHover={{ scale: 1.2 }}
                 whileTap={{ scale: 0.8 }}
-                type="button" className={style.open} onClick={handleVisibility}>
+                type="button" className={style.scrollto}
+                onClick={() => window.scrollTo(0, 0)}>
                     <SearchIcon fontSize='inherit' />
                 </motion.button>
             </div>

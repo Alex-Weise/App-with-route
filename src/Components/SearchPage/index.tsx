@@ -67,15 +67,13 @@ const SearchPage = () => {
             window.removeEventListener('scroll', handlerscroll);
         }
     }, [total, products, DEFAULT_URL, skip])
-    
-    const goBack = () => navigate(-1);
 
     if (isError) return (<h2 className={style.err}>Произошла ошибка</h2>);
 
     if (isSerchErr) return (
         <h2 className={style.err}>
             <Search value={valueSearch}/> 
-            <Button className={style.back} onClick={goBack} color="secondary" startIcon={<ReplyIcon />}>Назад</Button>
+            <Button className={style.back} onClick={() => navigate(-1)} color="secondary" startIcon={<ReplyIcon />}>Назад</Button>
             Ничего не найдено
         </h2>);
 
@@ -83,7 +81,7 @@ const SearchPage = () => {
         <section>
              <Search value={valueSearch}/> 
              <section>
-             <Button className={style.back} onClick={goBack} color="secondary" startIcon={<ReplyIcon />}>Назад</Button>
+             <Button className={style.back} onClick={() => navigate(-1)} color="secondary" startIcon={<ReplyIcon />}>Назад</Button>
             <div className={style.cards}>
             { isLoading ? <CircularProgress /> : 
             products.map( (item) => {
