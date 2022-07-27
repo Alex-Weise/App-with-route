@@ -7,13 +7,11 @@ import { CircularProgress, Button } from "@mui/material";
 import style from "./styles.module.scss";
 import { Search } from "../Search";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom"; 
 
 
 export const DEFAULT_REQUEST_LIMIT = 15;
 
 const Home = () => {
-    const navigate = useNavigate();
     const [products, setProducts] = useState<TContent[]>([]);
     const [isVisible, setIsVisible] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
@@ -26,7 +24,7 @@ const Home = () => {
     const DEFAULT_SEARCH_URL = `https://dummyjson.com/products/search?q=${search}&limit=${DEFAULT_REQUEST_LIMIT}`;
 
     useEffect ( () => {
-        fetch(DEFAULT_URL)
+        if (search === "") { fetch(DEFAULT_URL)
             .then( response => response.json())
             .then( data => {
                 setProducts(data.products);
@@ -34,6 +32,16 @@ const Home = () => {
             })
             .catch( err => setIsError(true))
             .finally(() => setIsLoading(false));
+        } else { fetch(DEFAULT_SEARCH_URL)
+            .then(response => response.json())
+            .then(data => {
+              if(data.products.length === 0) return setIsSearchErr(true);
+              setTotal(data.total);
+              setProducts(data.products);
+              setIsSearchErr(false);
+            })
+            .catch(err => setIsError(true))
+            .finally(() => setIsLoading(false));}
 
         return () => {
             setProducts([]);
@@ -41,9 +49,8 @@ const Home = () => {
             setIsVisible(false);
             setIsError(false);
             setIsSearchErr(false);
-            setSearch('');
         }
-    }, [DEFAULT_URL])
+    }, [DEFAULT_URL, DEFAULT_SEARCH_URL, search])
 
     useEffect ( () => {
         const concatURL = (search ? DEFAULT_SEARCH_URL : DEFAULT_URL) + `&skip=${skip}`;
@@ -71,23 +78,6 @@ const Home = () => {
         }
     }, [total, products, DEFAULT_URL, skip, search, DEFAULT_SEARCH_URL])
 
-    const handleSearchClick = () => {
-        setProducts([]);
-        setSkip(DEFAULT_REQUEST_LIMIT);
-        setIsVisible(false);
-
-        fetch(DEFAULT_SEARCH_URL)
-          .then(response => response.json())
-          .then(data => {
-            if(data.products.length === 0) return setIsSearchErr(true);
-            setTotal(data.total);
-            setProducts(data.products);
-            setIsSearchErr(false);
-          })
-          .catch(err => setIsError(true))
-          .finally(() => setIsLoading(false));
-    };
-
     const handleScrollToSearch = () => {
         window.scrollTo(0, 0);
         document.getElementById('inpSearch')?.focus();
@@ -98,19 +88,18 @@ const Home = () => {
     if (isSerchErr) return (
         <h2 className={style.err}>
             <Button className={style.back} 
-             onClick={() => {setIsSearchErr(false); navigate("/products"); setSearch("")}}
+             onClick={() => {setIsSearchErr(false); setSearch("")}}
              color="secondary" startIcon={<ReplyIcon />}>Назад</Button>
             Ничего не найдено
         </h2>);
+
     return (
         <main
           style={{position: 'relative'}}
         >
             <div className={style.search}>
                 <Search
-                    value={search}
-                    onChange={setSearch}
-                    onClick={handleSearchClick} />
+                    onClick={setSearch} />
                 <motion.button
                 initial={{opacity: 0}}
                 animate={{opacity: isVisible ? 1 : 0}}

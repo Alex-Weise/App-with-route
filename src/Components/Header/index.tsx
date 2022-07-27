@@ -65,7 +65,7 @@ const Header = () => {
                 animate={{color: (activeLink === "products") ? "#ba68c8" : "#757575"}}
                 whileTap={Variants.click}
                 >
-                  <Link to="/products" className={style.tab} replace={true} onClick={() => setActive("products")}>Все товары {(activeLink === "products") && <ActiveLine />}</Link>
+                  <Link to="/products" className={style.tab} id="All" onClick={() => setActive("products")}>Все товары {(activeLink === "products") && <ActiveLine />}</Link>
                 </motion.div>
           </motion.div>
             {user ?
