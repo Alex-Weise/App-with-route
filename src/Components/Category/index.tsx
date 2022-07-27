@@ -1,4 +1,4 @@
-import { Stack, Pagination, Skeleton } from "@mui/material";
+import { Stack, Pagination, CircularProgress } from "@mui/material";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -31,19 +31,6 @@ const Category = () => {
     const [imageAndCat, setImageAndCat] = useState<string[][]>([]);
 
     useEffect( () => {
-      // const load = async () => {
-      //    await fetch('https://dummyjson.com/products/categories')
-      //     .then(response => response.json())
-      //     .then(data => {
-      //       setMaxPage(Math.ceil(data.length / DEFAULT_LIMIT_CAT));
-      //       for (let i = 1; i <= maxPage; i++ ) {
-      //         if (i === countPage && i === 1) setCat(data.slice(0, DEFAULT_LIMIT_CAT))
-      //         else if (i === countPage) setCat(data.slice(DEFAULT_LIMIT_CAT * (i - 1), DEFAULT_LIMIT_CAT * i));
-      //       }
-      //     })
-      //     .catch(() => setIsError(true))
-      //     .finally(() => setIsLoading(false));
-      // };
       const load = async () => {
         try {
           let res = await fetch('https://dummyjson.com/products/categories');
@@ -68,19 +55,6 @@ const Category = () => {
     }, [countPage, maxPage])
 
     useEffect( () => {
-      // const loadIMG = async (str:string) => {
-      //   return await fetch(`https://dummyjson.com/products/category/${str}`)
-      //     .then(response => {
-      //       if (!response.ok) {
-      //         setIsError(true);
-      //         throw new Error(response.status.toString())}
-      //       return response.json()})
-      //     .then(data => { 
-      //       const arr:string[] = [str, data.products[0].images[1]];
-      //       if (imageAndCat.find(item => item[0] === str)) return null;
-      //       else {setImageAndCat(prev => prev.concat([arr]))}
-      //     })
-      // };
       const loadIMG = async (str:string) => {
         try {
           let res = await fetch(`https://dummyjson.com/products/category/${str}`);
@@ -118,11 +92,7 @@ const Category = () => {
             <Pagination count={maxPage} color="secondary" classes={{root: style.section}} onChange={handlePageChange} />
         </Stack>
         <section className={style.category}>
-            { isLoading ? 
-            <div className={style.text}>
-              <Skeleton variant="circular" className={style.img} />
-              <Skeleton variant="text" className={style.link} />
-            </div> : 
+            { isLoading ? <CircularProgress /> : 
              category.map( (item, index) => {
                 let cat = item.slice(0,1).toUpperCase() + item.slice(1);
                 let image = imageAndCat.find(i => i[0] === item);
@@ -137,7 +107,7 @@ const Category = () => {
                     <img src={image?.[1]} alt={item} className={style.img} loading="eager"
                         style={{border: `1.5px solid ${colors[index]}`}} />
                     <div style={{borderBottom: `1.5px solid ${colors[index]}`, padding: '5px', borderRadius: '8px'}}>
-                      <Link to={`/category/${item}`} className={image ? style.link : style.img}>
+                      <Link to={`/category/${item}`} className={style.link}>
                         {cat}
                       </Link>
                     </div>

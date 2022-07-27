@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { TContent } from "../../type/type";
-import { Search } from "../Search";
 import { CircularProgress, Button } from "@mui/material";
 import ReplyIcon from '@mui/icons-material/Reply';
 import { Cards } from "../Cards";
@@ -72,14 +71,12 @@ const SearchPage = () => {
 
     if (isSerchErr) return (
         <h2 className={style.err}>
-            <Search value={valueSearch}/> 
             <Button className={style.back} onClick={() => navigate(-1)} color="secondary" startIcon={<ReplyIcon />}>Назад</Button>
             Ничего не найдено
         </h2>);
 
     return (
         <section>
-             <Search value={valueSearch}/> 
              <section>
              <Button className={style.back} onClick={() => navigate(-1)} color="secondary" startIcon={<ReplyIcon />}>Назад</Button>
             <div className={style.cards}>

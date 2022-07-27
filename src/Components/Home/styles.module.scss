@@ -12,6 +12,12 @@
     border-radius: 10px;
 };
 
+.back {
+    display: flex;
+    font-size: 18px;
+    margin: 10px auto 10px 13%;
+};
+
 .err {
     display: grid;
     gap: 10px;
@@ -44,6 +50,9 @@
     .cards {
         width: 85%;
     };
+    .back {
+        font-size: 14px;
+    };
 };
 
 @include breakpoint (s) {
@@ -55,10 +64,16 @@
         margin-right: 40px;
         width: 95%;
     };
+    .back {
+        font-size: 12px;
+    };
 };
 
 @include breakpointMin (lg) {
     .scrollto {
         font-size: 36px;
+    };
+    .back {
+        font-size: 20px;
     };
 }

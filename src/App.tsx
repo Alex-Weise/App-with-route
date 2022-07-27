@@ -6,7 +6,6 @@ import { CategoryCards } from './Components/Category/CategoryCards';
 import { Home } from './Components/Home';
 import { OneCard } from './Components/OneCard';
 import { Provider } from './hoc/Provider';
-import { SearchPage } from './Components/SearchPage';
 
 function App() {
   return (
@@ -18,7 +17,6 @@ function App() {
         <Route path="category/:title" element={<CategoryCards />} />
         <Route path="products" element={<Home />} />
         <Route path="products/:id" element={<OneCard />} />
-        <Route path="products/search" element={<SearchPage />} />
       </Route>
     </Routes>
     </Provider>

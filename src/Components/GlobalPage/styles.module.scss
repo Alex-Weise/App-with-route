@@ -1,18 +1,19 @@
 @import "src/App.scss";
 .header {
     width: 100%;
-    max-height: 100%;
+    height: 75px;
 }
 
 .main {
     margin: 10px auto;
     text-align: center;
-    min-height: 500px;
+    min-height: calc(100vh - 145px);
+    overflow: overlay;
 }
 
 .footer {
     text-align: center;
-    padding-top: 15px;
+    height: 50px;
 }
 
 .foottext {
@@ -27,12 +28,27 @@
 }
 
 @include breakpoint (sm) {
+    .header {
+        height: 50px;
+    };
     .foottext {
         font-size: 14px;
     };
     .img {
         width: 20px;
         height: 20px;
+    };
+    .main {
+        height: calc(100vh - 105px);
+    };
+    .footer {
+        height: 30px;
+    };
+};
+
+@include breakpoint (xs) {
+    .foottext {
+        font-size: 12px;
     };
 };
 
