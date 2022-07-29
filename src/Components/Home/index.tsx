@@ -101,8 +101,8 @@ const Home = () => {
                 <Search
                     onClick={setSearch} />
                 <motion.button
-                initial={{opacity: 0}}
-                animate={{opacity: isVisible ? 1 : 0}}
+                initial={{opacity: 0, y: -60}}
+                animate={{opacity: isVisible ? 1 : 0, y: isVisible ? 0 : -60}}
                 whileHover={{ scale: 1.2 }}
                 whileTap={{ scale: 0.8 }}
                 type="button" className={style.scrollto}

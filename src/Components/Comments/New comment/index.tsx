@@ -22,13 +22,13 @@ const NewComment:FC<TProps> = ({setComment}) => {
         setValue(prev => prev + e.target.outerText);
     };
     const handleClickAdd = () => {
-        comment = {
+        user && (comment = {
             body: value,
             postId: Number(location.pathname.slice(-1)),
             user: {
                 username: user,
             },
-        };
+        });
         setComment((prev:TComments[]) => prev.concat(comment));
         setValue('');
     };

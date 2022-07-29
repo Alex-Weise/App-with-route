@@ -1,31 +1,20 @@
-import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hook/useAuth";
 import style from "./styles.module.scss"
 import CheckIcon from '@mui/icons-material/Check';
 import { FC } from "react";
 
-// type LocationProps = {
-//     state: {
-//       from: Location;
-//     };
-// };
-
 type TProp = {
     close: Function,
-    from: string,
 };
 
-const Login:FC<TProp>  = ({close, from}) => {
-    const navigate = useNavigate();
+const Login:FC<TProp>  = ({close}) => {
     const { signin } = useAuth();
-
-    const fromPage = from || '/products';
 
     const handleFormSubmit = (event:any) => {
         event.preventDefault();
         const form = event.target;
         const user = form.username.value;
-        signin(user, () => { navigate(fromPage, {replace: true})});
+        signin(user);
         close();
     };
 

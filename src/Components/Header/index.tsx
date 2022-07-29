@@ -1,5 +1,5 @@
 import { useAuth } from "../../hook/useAuth";
-import { useNavigate, useLocation, Link } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { useState } from "react";
 import { Box, Modal, Button } from "@mui/material";
 import LoginIcon from '@mui/icons-material/Login';
@@ -31,7 +31,6 @@ const Variants = {
 };
 
 const Header = () => {
-    const navigate = useNavigate();
     const location = useLocation();
     const [activeLink, setActive] = useState<string>(location.pathname.slice(1,9));
     const { user, signout } = useAuth();
@@ -39,10 +38,20 @@ const Header = () => {
     const handleOpen = () => setIsOpen(true);
     const handleClose = () => setIsOpen(false);
 
-    const handleOutClick = () => {
-      signout( () => navigate("/products", {replace: true}))
-    };    
-
+    // const checkAuth = () => {
+    //   token && user &&
+    //   fetch('https://dummyjson.com/auth/RESOURCE', {
+    //     method: 'GET', /* or POST/PUT/PATCH/DELETE */
+    //     headers: {
+    //       'Authorization': `Bearer ${token}`, 
+    //       'Content-Type': 'application/json',
+    //     }, 
+    //   })
+    //   .then(res => res.json())
+    //   .then(console.log);
+    // }
+    // checkAuth();
+    // console.log("header", user, token);
     return (
         <header style={{position: "relative"}}>
           <div>
@@ -71,8 +80,8 @@ const Header = () => {
             {user ?
               <Box className={style.boxHi}>
                 <p className={style.user}>{user}</p>
-                <Button className={style.visible} variant="outlined" color="error" onClick={handleOutClick}>Выйти</Button>
-                <Button className={ cx(style.hidden, style.logo)} variant="outlined" color="error" onClick={handleOutClick}
+                <Button className={style.visible} variant="outlined" color="error" onClick={() => signout()}>Выйти</Button>
+                <Button className={ cx(style.hidden, style.logo)} variant="outlined" color="error" onClick={() => signout()}
                 startIcon={<LogoutIcon />}></Button>  
               </Box> :
               <section >
@@ -89,7 +98,7 @@ const Header = () => {
                aria-describedby="modal-modal-description"
             >
               <div className={style.modal}>
-                  <Login close={handleClose} from={location.pathname} />
+                  <Login close={handleClose} />
               </div>
             </Modal>
         </header>
